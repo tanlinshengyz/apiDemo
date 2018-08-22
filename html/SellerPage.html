@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+		<link rel="stylesheet" type="text/css" href="../icon/aosen/css/font-awesome.min.css" />
+    <style>
+    	body,html{
+				  background:#f2f2f2;
+    	}
+    	.box{
+    		display:flex;
+			display:-webkit-flex;
+			height: 2.5rem;
+			width: 100%;
+			margin-bottom: 1px;
+			background: white;
+			padding: 0 0.5rem
+    	}
+    	.box div{
+    		height: 100%;
+    		line-height: 2.5rem
+    	}
+    	.pictures{
+    		width:100%;
+    		height:auto;
+    		background:white;
+    	}
+    	.pictures .picture{
+    		margin:0.3rem;
+    		width:4rem;
+    		height:4rem;
+    		float:left;
+    		overflow:hidden;
+    		text-align:center;
+    		line-height: 4rem;
+    		background:#DDDDDD;
+    		color:white;
+    	}
+    	.pictures .picture img{
+    		width:100%;
+    		height:100%;
+    		display:block;
+    	}
+    	.pictures div:last-child{
+
+    		clear:both;
+    	}
+    </style>
+</head>
+<body>
+   <div class="box">
+   		<div>
+   			<span style="color: red;margin-right: 0.1rem;font-size: 5vw">*</span>
+				<strong>游戏名称：</strong>
+   		</div>
+   		<div class="aui-list-item-input">
+   			 <input type="text"  placeholder="请输入游戏名称(必填)" style="height: 2.5rem" id="gameName"/>
+
+   		</div>
+   </div>
+   <div class="box">
+   		<div>
+   			<span style="color: red;margin-right: 0.1rem;font-size: 5vw">*</span>
+				<strong>游戏账号：</strong>
+   		</div>
+   		<div>
+   			<input type="text"  placeholder="请输入游戏账号(必填)" style="height: 2.5rem" id="gameUser"/>
+   		</div>
+   </div>
+   <div class="box">
+   		<div>
+   			<span style="color: red;margin-right: 0.1rem;font-size: 5vw">*</span>
+				<strong>交易金额：</strong>
+   		</div>
+   		<div>
+   			<input type="number"  placeholder="请输入交易金额(必填)" style="height: 2.5rem" id="price"/>
+   		</div>
+   </div>
+	 <div class="box">
+   		<div>
+   			<span style="color: red;margin-right: 0.1rem;font-size: 5vw">*</span>
+				<strong>确认收货时间：</strong>
+   		</div>
+   		<div>
+   			<span id="getGoodsTime">2018-04-17</span>
+   		</div>
+   </div>
+   <div class="box">
+   		<div>
+   			<span style="color: red;margin-right: 0.1rem;font-size: 5vw">*</span>
+				<strong>是否买家承担手续费：</strong>
+   		</div>
+   		<div>
+   			<input type="checkbox" class="aui-switch" style="margin-top: 0.6rem;margin-right: 1rem" onclick="checkBox(this)"/>
+   			<span id="isPay">否</span>
+   		</div>
+   </div>
+   <div class="box" style="margin-top: 0.5rem;">
+   		<div style="padding-left: 0.5rem">
+   			沟通渠道：
+   		</div>
+   		<div>
+   			<select id="commuPlat" onchange="chooseWay(this)">
+	          <option value="0">请选择沟通渠道</option>
+	          <option value="qq">QQ</option>
+	          <option value="wx">微信</option>
+	          <option value="other">其他</option>
+	        </select>
+   		</div>
+   </div>
+   <div class="box aui-hide" id="otherWayBox">
+   		<div style="padding-left: 0.5rem" >
+   			其他渠道：
+   		</div>
+   		<div>
+   			<input type="text"  placeholder="请输入其他渠道(选填)" style="height: 2.5rem" id="otherWay" oninput = "getWay(this)"/>
+   		</div>
+   </div>
+   <div class="box">
+   		<div style="padding-left: 0.5rem" >
+   			买家<span id="wayBname"></span>账号：
+   		</div>
+   		<div>
+   			<input type="text"  placeholder="请输入买家账号(选填)" style="height: 2.5rem" id="buyerAccount"/>
+   		</div>
+   </div>
+   <div class="box">
+   		<div style="padding-left: 0.5rem" class="aui-ellipsis-1">
+   			卖家<span id="waySname"></span>账号：
+   		</div>
+   		<div>
+   			<input type="text"  placeholder="请输入卖家账号(选填)" style="height: 2.5rem" id="sellerAccount"/>
+   		</div>
+   </div>
+   <!-- <div class="box">
+   		<div style="padding-left: 0.5rem">
+   			聊天截图：
+   		</div>
+   </div> -->
+   <!-- <div class="pictures">
+   		<div class="picture" onclick="uploadImg()">
+   			<i class="aui-iconfont aui-icon-plus" style="font-size: 2rem"></i>
+   		</div>
+   		<div></div>
+
+   </div> -->
+   <div class="box" style="margin-top: 1px;">
+   		<div style="padding-left: 0.5rem">
+   			其他备注：
+   		</div>
+   </div>
+   <div style="width: 100%;background: white;padding: 0.5rem 0.5rem;margin-bottom:2.5rem">
+   		<textarea name="" id="otherMsg" cols="30" rows="10" placeholder="请输入其他备注信息(选填)" style="height:auto;overflow:scroll"></textarea>
+   </div>
+   <div style="position: fixed;bottom: 0;left: 0;width: 100%;height: 2.5rem;text-align: center;line-height: 2.5rem;background: #e14104;color: white;font-size: 5.5vw;" onclick="submit()">提交</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/request.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/laydate/laydate.js"></script>
+<script type="text/javascript">
+	var orderNum;
+	var imgArray = [];
+	apiready = function(){
+		var now = new Date();
+		$api.text($api.byId('getGoodsTime'), getNowDate());
+		laydate.render({
+		  elem: '#getGoodsTime',
+		  type: 'datetime',
+		  theme: '#e14104',
+		  min:addDate(now,1)
+		});
+	};
+	function checkBox(tag){
+		if(tag.checked){
+			$api.text($api.byId('isPay'), '是');
+		}else{
+			$api.text($api.byId('isPay'), '否');
+		}
+	}
+	function uploadImg(){
+		api.actionSheet({
+		    cancelTitle: '取消',
+		    buttons: ['相机', '照片']
+		}, function(ret, err) {
+		    var index = ret.buttonIndex;
+		    if(index==1){
+		    	getPicture('camera')
+		    }
+		    if(index==2){
+		    	getPicture('library');
+		    }
+		});
+	}
+	function getPicture(type){
+		api.getPicture({
+		    sourceType: type,
+		    encodingType: 'jpg',
+		    mediaValue: 'pic',
+		    destinationType: 'url',
+		    allowEdit: false,
+		    quality: 100,
+		    saveToPhotoAlbum: false
+		}, function(ret, err) {
+		    if (ret) {
+		    	if(ret.data != ''){
+		    		imgArray.push(ret.data);
+		    		var html = '';
+
+		    		if(imgArray.length>0){
+		    			for(var i=0;i<imgArray.length;i++){
+		    				html+='<div class="picture" onclick="pictureBrowse('+i+')"><img src="'+imgArray[i]+'"/></div><div></div>';
+		    			}
+		    		}
+		    		html+='<div class="picture" onclick="uploadImg()">';
+		    		html+='<i class="aui-iconfont aui-icon-plus" style="font-size: 2rem"></i>';
+		    		html+='</div>';
+		    		html+='<div></div>';
+
+		    		$api.html($api.dom('.pictures'), html);
+
+		    	}
+		    } else {
+		    	api.alert({
+		    		msg:"获取图片失败"
+	            });
+		    }
+		});
+	}
+	function pictureBrowse(index){
+		api.openWin({
+	        name: 'pictureBrowse',
+	        url: 'pictureBrowse.html',
+	        pageParam:{
+	        	images:imgArray,
+	        	index:index
+	        },
+	        animation:{
+	        	type:'fade',
+	        	duration:300
+	        }
+        });
+	}
+	function submit(){
+		if($api.trimAll($api.val($api.byId('gameName'))) == ''){
+			api.toast({
+                msg: '游戏名称必填！',
+                duration: 4000,
+                location: 'bottom'
+            });
+            return false;
+		}
+		if($api.trimAll($api.val($api.byId('gameUser'))) == ''){
+			api.toast({
+                msg: '游戏账号必填！',
+                duration: 4000,
+                location: 'bottom'
+            });
+            return false;
+		}
+		if($api.trimAll($api.val($api.byId('price'))) == ''){
+			api.toast({
+                msg: '交易金额必填！',
+                duration: 4000,
+                location: 'bottom'
+            });
+            return false;
+		}
+
+		var data = {};
+	    data['values'] = {};
+	    data['files'] = {};
+	    data['values']['gameName'] = $api.val($api.byId('gameName'));
+	    data['values']['gameAccount'] = $api.val($api.byId('gameUser'));
+	    data['values']['price'] = $api.val($api.byId('price'));
+		if($api.text($api.byId('isPay')) == '否'){
+			data['values']['feePayer'] = 'seller';
+		}else{
+			data['values']['feePayer'] = 'buyer';
+		}
+		data['values']['getGoodsTime'] = $api.text($api.byId('getGoodsTime'));
+		if($api.val($api.byId('commuPlat')) == 'qq'){
+			data['values']['commuPlat'] = 'QQ';
+		}
+		if($api.val($api.byId('commuPlat')) == 'wx'){
+			data['values']['commuPlat'] = '微信';
+		}
+		if($api.val($api.byId('commuPlat')) == 'other'){
+			data['values']['commuPlat'] = $api.val($api.byId('otherWay'));
+		}
+		if($api.val($api.byId('commuPlat')) == '0'){
+			data['values']['commuPlat'] = '';
+		}
+	    data['values']['buyerAccount'] = $api.val($api.byId('buyerAccount'));
+	    data['values']['sellerAccount'] = $api.val($api.byId('sellerAccount'));
+	    if($api.val($api.byId('commuPlat')) == '0'){
+			data['values']['commuPlat'] = '';
+			data['values']['buyerAccount'] = '';
+	    	data['values']['sellerAccount'] = '';
+		}
+	    data['values']['otherMsg'] = $api.val($api.byId('otherMsg'));
+		data['values']['sellerId'] = $api.getStorage('userId');
+
+    for(var i=0;i<imgArray.length;i++){
+    	data['files']['file'+i] = imgArray[i];
+    }
+    requestData('Order/createYhOrder',data,'NO','NO','NO',_callbackRelt);
+	}
+	function _callbackRelt(ret){
+		if(ret.status == 200){
+			orderNum = ret.orderNum;
+			var dialog = new auiDialog({});
+			dialog.alert({
+          title:"交易码",
+          msg:orderNum,
+          buttons:['复制']
+      },function(ret){
+          if(ret){
+			var clipBoard = api.require('clipBoard');
+				clipBoard.set({
+				    value: orderNum
+				}, function(ret, err) {
+				    if (ret.status) {
+				        api.toast({
+			                msg: '交易码已复制到剪切板！',
+			                duration: 3000,
+			                location: 'bottom'
+			            });
+			            setTimeout(function(){
+			            	api.closeWin({
+                            });
+			            },1000);
+				    }
+				});
+			}
+      })
+		}else{
+			api.toast({
+	            msg: ret.msg,
+	            duration: 4000,
+	            location: 'bottom'
+	        });
+		}
+	}
+	function getNowDate() {
+		var date = new Date();
+		var sign1 = "-";
+		var sign2 = ":";
+		var year = date.getFullYear() // 年
+		var month = date.getMonth() + 1; // 月
+		var day  = date.getDate() + 1; // 日
+		var hour = date.getHours(); // 时
+		var minutes = date.getMinutes(); // 分
+		var seconds = date.getSeconds();//秒
+
+		if (month >= 1 && month <= 9) {
+		 month = "0" + month;
+		}
+		if (day >= 0 && day <= 9) {
+		 day = "0" + day;
+		}
+		if (hour >= 0 && hour <= 9) {
+		 hour = "0" + hour;
+		}
+		if (minutes >= 0 && minutes <= 9) {
+		 minutes = "0" + minutes;
+		}
+		if (seconds >= 0 && seconds <= 9) {
+		 seconds = "0" + seconds;
+		}
+		var currentdate = year + sign1 + month + sign1 + day + " " + hour + sign2 + minutes + sign2 + seconds;
+		return currentdate;
+	}
+	function chooseWay(tag){
+		if($api.val(tag) == 'qq'){
+			$api.text($api.byId('wayBname'), 'QQ');
+			$api.text($api.byId('waySname'), 'QQ');
+		}else if($api.val(tag) == 'wx'){
+			$api.text($api.byId('wayBname'), '微信');
+			$api.text($api.byId('waySname'), '微信');
+		}else{
+			$api.text($api.byId('wayBname'), '');
+			$api.text($api.byId('waySname'), '');
+		}
+		if($api.val(tag) == 'other'){
+			$api.removeCls($api.byId('otherWayBox'), 'aui-hide');
+		}else{
+			$api.addCls($api.byId('otherWayBox'), 'aui-hide');
+		}
+	}
+	function getWay(tag){
+		$api.text($api.byId('wayBname'), $api.val(tag));
+		$api.text($api.byId('waySname'), $api.val(tag));
+	}
+	function addDate(date, days) {
+        var d = new Date(date);
+        d.setDate(d.getDate() + days);
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+        var val = d.getFullYear() + "-" + month + "-" + day;
+        return val;
+    }
+</script>
+</html>

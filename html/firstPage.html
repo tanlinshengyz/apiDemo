@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"
+	/>
+	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<title>title</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+	<link rel="stylesheet" type="text/css" href="../icon/aosen/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="../css/swiper.min.css" />
+	<style>
+		html,
+		body {
+			background: #EEEEEE;
+		}
+
+		.my-nominate {
+			height: auto;
+			width: 100%;
+			border-bottom: 1px solid #DDDDDD;
+		}
+
+		.box-vertical-middle {
+			display: flex;
+			align-items: center !important;
+			-webkit-align-items: center !important;
+			-moz-align-items: center !important;
+			-o-align-items: center !important;
+		}
+
+		.accountIcon {
+			width: 2rem;
+			height: 2rem;
+			border-radius: 10px;
+			padding-top: 0.4rem;
+			font-size: 7vw;
+			color: white;
+
+		}
+
+		.gameImg {
+			width: 2rem;
+			height: 2rem;
+			border-radius: 10px;
+			overflow: hidden;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+
+		.gameImg img {
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+
+		.my-success-deal {
+			width: 100%;
+			border-top: 1px solid #DDDDDD;
+			border-bottom: 1px solid #DDDDDD;
+			background: white;
+		}
+
+		.my-success-count {
+			width: 100%;
+			height: 1.5rem;
+			color: #23cd77;
+			text-align: center;
+			/*line-height:1.5rem;*/
+			font-weight: bold;
+			/*margin-bottom: 0.5rem;*/
+		}
+
+		.swiper-container {
+			width: 100%;
+			height: 3.5rem;
+		}
+
+		.deal-content {
+			height: 100%;
+			line-height: 3rem;
+			text-align: center;
+		}
+
+		.my-hot {
+			width: 100%;
+			border-top: 1px solid #DDDDDD;
+			border-bottom: 1px solid #DDDDDD;
+			background: white;
+		}
+
+		.my-ad {
+			width: 100%;
+			height: 6rem;
+			background: white;
+		}
+
+		.hot-title {
+			width: 100%;
+			height: 2.5rem;
+			line-height: 2.5rem;
+			font-size: 5vw;
+			font-weight: bold;
+			color: #73737b;
+			padding-left: 16px;
+		}
+
+		.hot-search {
+			width: 100%;
+			height: 2.2rem;
+			text-align: center;
+			line-height: 2.3rem;
+		}
+
+		.aui-list-item-media {
+			width: 2.8rem !important;
+			height: 2.8rem;
+			overflow: hidden;
+			padding: 0 !important;
+			margin: 0.8rem 0.8rem 0.8rem 0;
+			border-radius: 10px;
+		}
+
+		.aui-list-item-media img {
+			width: 100%;
+			height: 100%;
+			display: none;
+		}
+
+		.account_img {
+			width: 2rem;
+			height: 2rem;
+			margin: 0 auto;
+		}
+
+		.safe_img {
+			width: 0.7rem;
+			height: 0.9rem;
+			display: inline-block;
+			margin-top: 0.5rem;
+			margin-bottom: -0.1rem;
+			margin-right: 0.6rem;
+		}
+
+		.protection {
+			width: 2rem;
+			height: 2rem;
+			display: inline-block;
+			margin-left: 0.8rem;
+
+		}
+
+		.swiper-wrapper.aui-col-xs-10 {
+			width: 80%;
+		}
+
+		.hot {
+			width: 0.7rem;
+			height: 0.9rem;
+			display: inline-block;
+			margin-top: 1.2rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="my-nominate" id="nominateBox">
+		<section class="aui-grid">
+			<div class="aui-row" style="margin-bottom: 0;">
+				<div class="aui-col-xs-4" style="padding:0.5rem 0" onclick="goToPageTow('fPro')">
+					<!-- <i class="fa fa-credit-card accountIcon" style="background:#ff5e31;"></i> -->
+					<img src="../image/recycle.jpg" alt="" class="account_img">
+					<div class="aui-grid-label">成品账号</div>
+				</div>
+				<div class="aui-col-xs-4" style="padding:0.5rem 0" onclick="goToPageSale()" id="publishRecyleGoods">
+					<!-- <i class="fa fa-recycle accountIcon" style="background:#94e321;"></i> -->
+					<img src="../image/product.jpg" alt="" class="account_img">
+					<div class="aui-grid-label">回收账号</div>
+				</div>
+				<!-- <div class="aui-col-xs-4 aui-hide" style="padding:0.5rem 0" onclick="goToPageTow('rPro')" id="recyleGoods">
+					<i class="fa fa-recycle accountIcon" style="background:#94e321;"></i>
+					<div class="aui-grid-label">回收账号</div>
+				</div> -->
+				<div class="aui-col-xs-4" style="padding:0.5rem 0" onclick="goToPageTow('shop')">
+					<!-- <i class="fa fa-bank accountIcon" style="background:#29dfff;"></i> -->
+					<img src="../image/choiceness.png" alt="" class="account_img">
+					<div class="aui-grid-label">精选店铺</div>
+				</div>
+			</div>
+		</section>
+		<section class="aui-grid" style="margin-top: 20px">
+			<div class="aui-row" style="" id="recoList">
+				<!-- <div class="aui-col-xs-3" style="padding:0.5rem 0" onclick="goToProductList()">
+	            <div class="gameImg">
+	            	<img src="../image/box.png"/>
+	            </div>
+	            <div class="aui-grid-label aui-ellipsis-1">游戏名</div>
+	        </div> -->
+			</div>
+		</section>
+	</div>
+	<div class="my-success-deal">
+		<div class="my-success-count" id="successDeal">
+			<img src="../image/protection.jpg" alt="" class="safe_img"> 
+			已经安全交易00笔
+		</div>
+
+		<div class="swiper-container aui-row">
+			<div class="aui-col-xs-2">
+				<img src="../image/imgIndex/aqjy@2x.png" alt="" class="protection">
+				<!-- <img src="../image/safe.jpg" alt="" class="protection"> -->
+			</div>
+			<div class="swiper-wrapper aui-col-xs-10">
+				<!-- <div class="swiper-slide aui-row">
+	        	<div class="aui-col-xs-6 aui-ellipsis-1 deal-content">猎魂觉醒绝对物超所值</div>
+	        	<div class="aui-col-xs-3 aui-ellipsis-1 deal-content" style="color: red">&yen;450</div>
+	        	<div class="aui-col-xs-3 aui-ellipsis-1 deal-content" style="color: gray">45分钟前</div>
+	        </div> -->
+			</div>
+		</div>
+	</div>
+	<!--<div class="my-ad aui-margin-t-15">
+  	<img src="" alt="" />
+  </div>-->
+	<div class="my-hot aui-margin-t-15">
+
+		<div class="hot-title">
+			<img src="../image/hot.png" alt="" class="hot"> &nbsp;&nbsp;热卖推荐
+		</div>
+		<div class="aui-card-list-content" style="border-top: none;padding:0 10px;">
+			<ul class="aui-list aui-media-list clearfix" id="hotListBox">
+				<!-- <li class="aui-list-item aui-list-item-middle" onclick="goToProductList()">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media">
+                        <img src="../image/bg.png">
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14">AUI</div>
+                        </div>
+                        <div style="font-size: 13px">
+                            成品号<span style="margin: 0 0.2rem;color: red">500</span>件
+                        </div>
+                    </div>
+                </div>
+            </li> -->
+
+			</ul>
+		</div>
+		<div class="hot-search" onclick="goToPageTow('fPro')">搜索其他游戏</div>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+
+<script type="text/javascript" src="../script/request.js"></script>
+<script type="text/javascript" src="../script/swiper.min.js"></script>
+<script type="text/javascript">
+	var UIScrollPicture;
+	var activityObj;
+	var actImgs = [];
+	var userType;
+	var successDealCount;
+	apiready = function () {
+		userType = $api.getStorage('userType');
+		api.addEventListener({
+			name: 'reload'
+		}, function (ret, err) {
+			window.location.reload();
+		});
+
+		api.setRefreshHeaderInfo({
+			loadingImg: 'widget://image/refresh.png',
+			bgColor: 'rgba(0,0,0,0)',
+			textColor: 'rgb(150,150,150)',
+			textDown: '下拉刷新...',
+			textUp: '松开刷新...'
+		}, function (ret, err) {
+			getPageData('NO', 'YES');
+
+		});
+		if (userType == 'seller') {
+			$api.addCls($api.byId('publishRecyleGoods'), 'aui-hide');
+			$api.removeCls($api.byId('recyleGoods'), 'aui-hide');
+		} else {
+			$api.addCls($api.byId('recyleGoods'), 'aui-hide');
+			$api.removeCls($api.byId('publishRecyleGoods'), 'aui-hide');
+		}
+
+		$api.css($api.byId('nominateBox'), 'margin-top:' + api.winHeight / 3.8 + 'px');
+		var icons = $api.domAll('.canAccount-icon');
+		var gameImgs = $api.domAll('.games-img');
+		for (var i = 0; i < icons.length; i++) {
+			$api.css(icons[i], 'height:' + $api.cssVal(icons[i], 'width'));
+		}
+		for (var i = 0; i < gameImgs.length; i++) {
+			$api.css(gameImgs[i], 'height:' + $api.cssVal(gameImgs[i], 'width'));
+		}
+		getPageData('NO', 'NO');
+		UIScrollPicture = api.require('UIScrollPicture');
+
+		var counter = 0;
+		var timer = setInterval(function () {
+			counter++;
+			$api.html($api.byId('successDeal'), '<img src="../image/protection.jpg" alt="" class="safe_img"/>已经安全交易' +
+				counter + '笔');
+			if (counter / 250 >= 5 || counter >= successDealCount) {
+				$api.html($api.byId('successDeal'), '<img src="../image/protection.jpg" alt="" class="safe_img"/>已经安全交易' +
+					successDealCount + '笔');
+				clearInterval(timer);
+			}
+
+		}, 1);
+
+	};
+
+	function showPictures() {
+		UIScrollPicture.open({
+			rect: {
+				x: 0,
+				y: 0,
+				w: api.winWidth,
+				h: api.winHeight / 3.8
+			},
+			data: {
+				paths: actImgs
+
+			},
+			styles: {
+				indicator: {
+					dot: {
+						w: 8,
+						h: 8,
+						r: 4,
+						//margin: 4,
+					},
+					margin: 10,
+					borderRadius: 20,
+					align: 'center',
+					color: 'rgba(0,0,0,0.5)',
+					activeColor: '#E91E63'
+				}
+			},
+			contentMode: 'scaleToFill',
+			interval: 3,
+			fixedOn: api.frameName,
+			loop: true,
+			fixed: false
+		}, function (ret, err) {
+			if (ret) {
+				if (ret.eventType == 'click') {
+					api.openWin({
+						name: 'activityWeb',
+						url: './winWeb.html',
+						pageParam: {
+							page: activityObj[ret.index].activity_url,
+							title: activityObj[ret.index].activity_name
+						}
+					});
+				}
+			}
+		});
+	}
+
+	function goToPageTow(type) {
+		api.sendEvent({
+			name: 'frameClick',
+			extra: {
+				index: 1,
+				type: type
+			}
+		});
+
+	}
+
+	function goToProductList(id) {
+		api.openWin({
+			name: 'ProductListPage',
+			url: './win.html',
+			pageParam: {
+				page: 'ProductListPage',
+				title: '商品列表',
+				data: {
+					id: id,
+					userType: 'seller'
+				},
+				bounces: true
+			}
+		});
+	}
+
+	function getPageData(loading, isDown) {
+		var data = {};
+		requestData('Index/index', data, loading, 'NO', isDown, _callbackInt);
+	}
+
+	function _callbackInt(ret) {
+		if (ret.status == 200) {
+			if (ret.actList.length > 0) {
+				activityObj = ret.actList;
+
+				for (var i = 0; i < ret.actList.length; i++) {
+					actImgs.push(pictureUrl + ret.actList[i].activity_picture);
+				}
+			} else {
+				actImgs.push(pictureUrl + 'nodata.jpg');
+			}
+			if (ret.recoList.length > 0) {
+				var html = '';
+				for (var i = 0; i < ret.recoList.length; i++) {
+					html += '<div class="aui-col-xs-3" style="padding:0.5rem 0" onclick="goToProductList(' + ret.recoList[i].id +
+						')">';
+					html += '<div class="gameImg">';
+					html += '<img src="' + pictureUrl + ret.recoList[i].game_icon + '"/>';
+					html += '</div>';
+					html += '<div class="aui-grid-label">' + ret.recoList[i].game_name + '</div>';
+					html += '</div>';
+				}
+				$api.html($api.byId('recoList'), html);
+
+			}
+			if (ret.hotList.length > 0) {
+				var html = '';
+				for (var i = 0; i < ret.hotList.length; i++) {
+					html += '<li class="aui-list-item aui-list-item-middle" style="width:50%;float:left;padding-left:0" onclick="goToProductList(' + ret.hotList[i].id + ')">';
+					html += '<div class="aui-media-list-item-inner">';
+					html += '<div class="aui-list-item-media">';
+					html += '<img src="' + pictureUrl + ret.hotList[i].game_icon + '">';
+					html += '</div>';
+					html += '<div class="aui-list-item-inner">';
+					//html += '<div class="aui-list-item-inner aui-list-item-arrow">';
+					html += '<div class="aui-list-item-text">';
+					html += '<div class="aui-list-item-title aui-font-size-14">' + ret.hotList[i].game_name + '</div>';
+					html += '</div>';
+					html += '<div style="font-size: 13px">成品号<span style="margin: 0 0.2rem;color: red">' + ret.hotList[i].proNum +
+						'</span>件';
+					html += '</div>';
+					html += '</div>';
+					html += '</div>';
+					html += '</li>';
+				}
+				$api.html($api.byId('hotListBox'), html);
+
+			}
+			if (ret.successDealCount > 0) {
+				successDealCount = ret.successDealCount;
+				var html = '';
+				if (ret.orderList.length > 0) {
+					for (var i = 0; i < ret.orderList.length; i++) {
+						html += '<div class="swiper-slide aui-row">';
+						html +=
+							'<div class="aui-col-xs-4 aui-ellipsis-1 deal-content" style="text-align: left;padding-left:0.6rem">约好订单</div>';
+						html += '<div class="aui-col-xs-4 aui-ellipsis-1 deal-content" style="color: red;text-align: center">&yen;' + ret
+							.orderList[i].price + '</div>';
+						html += '<div class="aui-col-xs-4 aui-ellipsis-1 deal-content" style="color: gray">' + ret.orderList[i].time +
+							'</div>';
+						html += '</div>';
+					}
+				}
+				if (ret.yuehaoList.length > 0) {
+					for (var j = 0; j < ret.yuehaoList.length; j++) {
+						html += '<div class="swiper-slide aui-row">';
+						html +=
+							'<div class="aui-col-xs-4 aui-ellipsis-1 deal-content" style="text-align: left;padding-left:0.6rem">约好订单</div>';
+						html += '<div class="aui-col-xs-4 aui-ellipsis-1 deal-content" style="color: red;text-align: center">&yen;' + ret
+							.yuehaoList[j].price + '</div>';
+						html += '<div class="aui-col-xs-4 aui-ellipsis-1 deal-content" style="color: gray">' + ret.yuehaoList[j].time +
+							'</div>';
+						html += '</div>';
+					}
+				}
+				$api.html($api.dom('.swiper-wrapper'), html);
+				var mySwiper = new Swiper('.swiper-container', {
+					direction: 'vertical',
+					loop: true,
+					autoplay: {
+						delay: 3000,
+						stopOnLastSlide: false,
+						disableOnInteraction: false
+					},
+				})
+
+			}
+		} else {
+			actImgs.push(pictureUrl + 'nodata.jpg');
+		}
+		showPictures();
+
+	}
+
+	function goToPageSale() {
+		var userId = $api.getStorage('userId');
+
+		if (userId) {
+			api.openWin({
+				name: 'publishRecyleGoods',
+				url: './win.html',
+				pageParam: {
+					page: 'publishRecyleGoods',
+					title: '发布账号'
+				}
+			});
+		} else {
+			api.openWin({
+				name: 'login',
+				url: './winLogin.html',
+				pageParam: {
+					page: 'login',
+					title: '登陆'
+				}
+			});
+		}
+	}
+</script>
+
+</html>

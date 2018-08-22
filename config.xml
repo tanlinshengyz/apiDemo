@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget id="A6076679856280" version="0.0.1">
+  <name>Project1</name>
+  <description>Example For APICloud.</description>
+  <author email="developer@apicloud.com" href="http://www.apicloud.com">Developer</author>
+  <content src="index.html"/>
+  <preference name="pageBounce" value="false"/>
+  <preference name="appBackground" value="rgba(0,0,0,0.0)"/>
+  <preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
+  <preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
+  <preference name="hScrollBarEnabled" value="false"/>
+  <preference name="vScrollBarEnabled" value="false"/>
+  <preference name="autoLaunch" value="true"/>
+  <preference name="fullScreen" value="false"/>
+  <preference name="autoUpdate" value="true"/>
+  <preference name="smartUpdate" value="false"/>
+  <preference name="debug" value="true"/>
+  <preference name="statusBarAppearance" value="true"/>
+  <permission name="readPhoneState"/>
+  <permission name="camera"/>
+  <permission name="record"/>
+  <permission name="location"/>
+  <permission name="fileSystem"/>
+  <permission name="internet"/>
+  <permission name="bootCompleted"/>
+  <permission name="hardware"/>
+  <access origin="*"/>
+  <feature name="rongCloud2">
+    <param name="appKey" value="k51hidwqkcgnb"/>
+  </feature>
+  <feature name="aliPayPlus">
+    <param name="urlScheme" value="AliPayPlusA6076679856280"/>
+  </feature>
+  <feature name="ajpush">
+    <param name="app_key" value="e5679ea43e2f9996b31a268b"/>
+    <param name="channel" value="100000"/>
+  </feature>
+</widget>

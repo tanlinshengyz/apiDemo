@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+		<link rel="stylesheet" type="text/css" href="../icon/aosen/css/font-awesome.min.css" />
+    <style>
+    	body,html{
+				background:#EEEEEE;
+				margin-bottom: 2.5rem;
+    	}
+      .aui-list-item{
+        height:3rem !important;
+      }
+    </style>
+</head>
+<body>
+  <div class="aui-content">
+      <ul class="aui-list aui-list-in">
+          <li class="aui-list-item aui-list-item-middle" onclick="userEdit()">
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">个人资料</div>
+              </div>
+          </li>
+          <li class="aui-list-item" onclick="changePhone()">
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">手机号码</div>
+                  <span class="aui-pull-right" id="phoneNum"></span>
+              </div>
+
+          </li>
+          <li class="aui-list-item" onclick="changePassword()">
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">修改密码</div>
+              </div>
+          </li>
+          <!-- <li class="aui-list-item" onclick="changePhone()">
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">邮箱</div>
+                  <span class="aui-pull-right" id="email"></span>
+              </div>
+
+          </li> -->
+      </ul>
+  </div>
+  <div class="aui-content aui-margin-t-10">
+      <ul class="aui-list aui-list-in" onclick="clearCache()">
+          <li class="aui-list-item aui-list-item-middle">
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">清除缓存</div>
+          </li>
+          <!-- <li class="aui-list-item">
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">检测更新</div>
+              </div>
+          </li> -->
+
+      </ul>
+  </div>
+	<div style="position: fixed;bottom: 0;left: 0;width: 100%;height: 2.5rem;text-align: center;line-height: 2.5rem;background: #e14104;color: white;font-size: 5.5vw;" onclick="quit()">退出登录</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/request.js"></script>
+<script type="text/javascript">
+  var userId;
+  var userInfo;
+	apiready = function(){
+    userId = $api.getStorage('userId');
+    api.addEventListener({
+        name: 'editDone'
+    }, function(ret, err){
+        window.location.reload();
+    });
+
+    getuserInfo();
+	};
+  function getuserInfo(){
+    var data = {};
+    data['values'] = {};
+    data['values']['userId'] = userId;
+    requestData('Users/getUserMsg',data,'NO','NO','NO',_callbackInfo);
+  }
+  function _callbackInfo(ret){
+    if(ret.status == 200){
+      userInfo = ret.user;
+      $api.text($api.byId('phoneNum'), ret.user.user_tel.substring(0,3)+'****'+ret.user.user_tel.substring(7));
+
+    }
+  }
+  function userEdit(){
+    api.openWin({
+        name: 'userEdit',
+        url: './win.html',
+        pageParam: {
+            page:'userEdit',
+            title: '个人资料',
+            data:userInfo
+        }
+    });
+  }
+  function changePassword(){
+    api.openWin({
+        name: 'resetPage',
+        url: './win.html',
+        pageParam: {
+            page:'resetPage',
+            title: '重置密码',
+            data:'reset'
+        }
+    });
+  }
+  function clearCache(){
+    api.clearCache(function(){
+        api.toast({
+            msg:'清除完成'
+        });
+    });
+
+  }
+	function quit(){
+		$api.clearStorage();
+		api.sendEvent({
+		    name: 'quit',
+
+		});
+
+		api.closeWin();
+
+
+	}
+	function changePhone(){
+		api.openWin({
+	        name: 'changePhone',
+	        url: './win.html',
+	        pageParam: {
+	            page:'changePhone',
+	            title: '换绑手机号',
+	        }
+	    });
+	}
+</script>
+</html>

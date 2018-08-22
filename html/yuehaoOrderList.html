@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="../script/layui/css/layui.css"/>
+	<link rel="stylesheet" type="text/css" href="../icon/aosen/css/font-awesome.min.css" />
+    <style>
+    	body,html{
+				background:#EEEEEE;
+    	}
+    	.layui-tab{
+    		background:white;
+    		margin-top:0 !important;
+    	}
+      .layui-tab-title{
+      	display:flex;
+				display:-webkit-flex;
+				-webkit-justify-content: center;
+				justify-content: center;
+      }
+      .layui-tab-title li{
+      	width:50%;
+      	padding:0 !important;
+      	font-size:3.5vw
+      }
+      .order-title{
+      	width:100%;
+      	height:2rem;
+      	background:white;
+      	line-height: 2rem;
+      	padding:0 0.5rem;
+      }
+      .layui-tab-content{
+      	background:#EEEEEE;
+      	padding:0 ;
+      	padding-top:0.3rem;
+      }
+      .pro-msg{
+      	width:100%;
+      	height:5rem;
+      	background:#F2F2F2;
+				padding: 0 0.5rem;
+      }
+      .layui-tab-bar{
+      	display:none
+      }
+      .proImgBox{
+      	width:90%;
+      	height:90%;
+      	margin:0 auto;
+      	overflow:hidden;
+      }
+      .proImgBox img{
+      	width:100%;
+      	height:100%;
+      	display:block;
+      }
+      .flex-v{
+      	display:flex;
+		display:-webkit-flex;
+		flex-direction: column;
+		-webkit-justify-content: center;
+		justify-content: center;
+      }
+      .proMsg{
+      	width:100%;
+      	height:1.5rem;
+      	line-height: 1.5rem
+      }
+      .orderMsg{
+      	width:100%;
+      	background:white;
+      	margin-bottom:0.3rem;
+      }
+    </style>
+</head>
+<body>
+  <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+  <ul class="layui-tab-title" style="background: white">
+    <li class="layui-this" style="" onclick="changeTag(0)">买入</li>
+    <li class="" onclick="changeTag(1)">卖出</li>
+  </ul>
+  <div class="layui-tab-content">
+    <div class="layui-tab-item layui-show">
+    	<!-- <div class="order-title">
+	    	<span class="aui-pull-left" style="color:#757575">交易号：<span style="color: #999999">222222222</span></span>
+	    	<span class="aui-pull-right" style="color: #ff4800">待付款</span>
+    	</div> -->
+    	<!-- <div class="pro-msg aui-row">
+
+    		<div class="aui-col-xs-12 flex-v" style="height: 100%">
+    			<div class="proMsg aui-ellipsis-1">
+    				<span style="color: #707070">游戏名称:<span>猎魂觉醒</span></span>
+    			</div>
+    			<div class="proMsg" style="color: #707070">
+    				<span>游戏价格:</span>&yen;<span>500.00</span>
+    			</div>
+    			<div class="proMsg">
+    				<span style="color: #707070">游戏账号:</span><span style="color: #707070">754844552</span>
+    			</div>
+    		</div>
+    	</div> -->
+    	<!-- <div class="orderMsg flex-v" style="padding-right: 0.5rem;padding-bottom: 0.5rem">
+    		<div style="width: 100%;margin-top: 0.3rem"><span class="aui-pull-right" style="color: #757575">共计：&yen;<span>500.00</span></span></div>
+    		<div style="width: 100%;margin-top: 0.3rem"><span class="aui-pull-right" style="color: #757575">(其中平台手续费：&yen;<span>12.00</span>)</span></div>
+    		<div style="width: 100%;margin-top: 0.3rem">
+    			<span class="aui-pull-right" style="border: 1px solid #ff4800;color: #ff4800;padding: 0.3rem 0.5rem;margin-right: 0.5rem">支付订单</span>
+
+    		</div>
+    	</div> -->
+    </div>
+    <div class="layui-tab-item"></div>
+  </div>
+</div>
+
+	<div class="aui-hide" id="noData" style="text-align: center">
+		<img src="../image/nodata.jpg"/>
+		<span>暂无数据~~</span>
+	</div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/request.js"></script>
+<script type="text/javascript" src="../script/layui/layui.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript">
+  var userId;
+  var index;
+  var tabitems;
+	var type;
+	var orderObj;
+	var oInfo = {};
+    apiready = function(){
+        index = api.pageParam.data;
+        if(index == 0){
+        	type = 'buy';
+        }else if(index == 1){
+        	type = 'sell';
+        }
+        var tabtitles = $api.domAll($api.dom('.layui-tab-title'),'li');
+        tabitems = $api.domAll('.layui-tab-item');
+        for(var i=0;i<tabtitles.length;i++){
+        	if(index == i){
+        		$api.addCls(tabtitles[i], 'layui-this');
+        		$api.addCls(tabitems[i], 'layui-show');
+        	}else{
+        		$api.removeCls(tabtitles[i], 'layui-this');
+        		$api.removeCls(tabitems[i], 'layui-show');
+        	}
+        }
+     getOrderList();
+    }
+    layui.use('element', function(){
+	  var $ = layui.jquery
+	  ,element = layui.element;
+	});
+	function getOrderList(){
+		var data = {};
+		data['values'] = {};
+		data['values']['userId'] = $api.getStorage('userId');
+		data['values']['type'] = type;
+		requestData('Order/getYueHaoOrderList',data,'NO','NO','NO',_callbackList);
+	}
+	function _callbackList(ret){
+		if(ret.status == 200){
+			if(ret.list.length>0){
+				$api.addCls($api.byId('noData'), 'aui-hide');
+				var html = '';
+				orderObj = ret.list;
+				for(var i=0;i<ret.list.length;i++){
+					html+='<div class="order-title">';
+					html+='<span class="aui-pull-left" style="color:#757575">交易号：<span style="color: #999999">'+ret.list[i].order_num+'</span></span>';
+					if(ret.list[i].is_pay == 'NO' && ret.list[i].status == 'closed'){
+						html+='<span class="aui-pull-right" style="color: #ff4800">已关闭</span>';
+					}else if(ret.list[i].is_pay == 'NO'){
+							html+='<span class="aui-pull-right" style="color: #ff4800">待付款</span>';
+					}else{
+
+						if(ret.list[i].status == 'wait'){
+							html+='<span class="aui-pull-right" style="color: #ff4800">待发货</span>';
+						}
+						if(ret.list[i].status == 'dealing'){
+							html+='<span class="aui-pull-right" style="color: #ff4800">待收货</span>';
+						}
+						if(ret.list[i].status == 'finished'){
+							html+='<span class="aui-pull-right" style="color: red">交易成功</span>';
+						}
+						if(ret.list[i].status == 'quiting'){
+							html+='<span class="aui-pull-right" style="color: red">退款(未到账)</span>';
+						}
+						if(ret.list[i].status == 'quit'){
+							html+='<span class="aui-pull-right" style="color: red">退款(已到账)</span>';
+						}
+					}
+					html+='</div>';
+					html+='<div class="pro-msg aui-row">';
+					html+='<div class="aui-col-xs-12 flex-v" style="height: 100%">';
+					html+='<div class="proMsg aui-ellipsis-1">';
+					html+='<span style="color: #707070">游戏名称：<span>'+ret.list[i].game_name+'</span></span>';
+					html+='</div>';
+					html+='<div class="proMsg" style="color: #707070">';
+					html+='<span>游戏价格：</span>&yen;<span>'+ret.list[i].price+'</span>';
+					html+='</div>';
+					html+='<div class="proMsg">';
+					html+='<span style="color: #707070">游戏账号：</span><span style="color: #707070">'+ret.list[i].game_account+'</span>';
+					html+='</div></div></div>';
+					html+='<div class="orderMsg flex-v" style="padding-right: 0.5rem;padding-bottom: 0.5rem">';
+					html+='<div style="width: 100%;margin-top: 0.3rem"><span class="aui-pull-right" style="color: #757575">共计：&yen;<span>'+ret.list[i].final_price+'</span></span></div>';
+					html+='<div style="width: 100%;margin-top: 0.3rem"><span class="aui-pull-right" style="color: #757575">(其中平台手续费：&yen;<span>'+ret.list[i].fee+'</span>)</span></div>';
+					html+='<div style="width: 100%;margin-top: 0.3rem"><span class="aui-pull-right" style="color: #757575">手续费承担者：<span style="color:red">'+ret.list[i].fee_payer+'</span></span></div>';
+					html+='<div style="width: 100%;margin-top: 0.3rem">';
+					// html+='<span class="aui-pull-right" style="border: 1px solid #000;color: #666666;padding: 0.3rem 0.5rem;">关闭交易</span>';
+					if(index == 0){
+						if(ret.list[i].is_pay == 'NO'){
+							html+='<span class="aui-pull-right" style="border: 1px solid #ff4800;color: #ff4800;padding: 0.3rem 0.5rem;margin-right: 0.5rem" onclick="goToPay('+i+')">支付订单</span>';
+						}
+						if(ret.list[i].status == 'dealing'){
+							html+='<span class="aui-pull-right" style="border: 1px solid #ff4800;color: #ff4800;padding: 0.3rem 0.5rem;margin-right: 0.5rem" onclick="getGoods('+ret.list[i].id+')">确认收货</span>';
+						}
+						if(ret.list[i].status == 'dealing' || (ret.list[i].is_pay == 'YES' && ret.list[i].status == 'wait')){
+//							html+='<span class="aui-pull-right" style="border: 1px solid #ff4800;color: #ff4800;padding: 0.3rem 0.5rem;margin-right: 0.5rem" onclick="refund('+ret.list[i].id+')">申请退款</span>';
+						}
+					}else{
+						html+='<span class="aui-pull-right" style="border: 1px solid #ff4800;color: #ff4800;padding: 0.3rem 0.5rem;margin-right: 0.5rem" onclick="copyOrderNum(\''+ret.list[i].order_num+'\')">复制交易号</span>';
+						if(ret.list[i].status == 'wait' && ret.list[i].is_pay == 'YES'){
+							html+='<span class="aui-pull-right" style="border: 1px solid #ff4800;color: #ff4800;padding: 0.3rem 0.5rem;margin-right: 0.5rem" onclick="sendGoods('+ret.list[i].id+')">确认发货</span>';
+						}
+					}
+
+					html+='</div></div>';
+				}
+				if(index == 0){
+		        	$api.html(tabitems[0], html);
+		        }else if(index == 1){
+		        	$api.html(tabitems[1], html);
+		        }
+			}else{
+				$api.removeCls($api.byId('noData'), 'aui-hide');
+			}
+		}
+	}
+	function changeTag(id){
+		index = id;
+		if(index == 0){
+        	type = 'buy';
+        }else if(index == 1){
+        	type = 'sell';
+        }
+		getOrderList();
+	}
+	function copyOrderNum(orderNum){
+		var clipBoard = api.require('clipBoard');
+			clipBoard.set({
+					value: orderNum
+			}, function(ret, err) {
+					if (ret.status) {
+							api.toast({
+										msg: '交易码已复制到剪切板！',
+										duration: 3000,
+										location: 'bottom'
+								});
+
+					}
+			});
+	}
+	function sendGoods(id){
+		var orderId = id;
+		var data = {};
+		data['values'] = {};
+		data['values']['orderId'] = orderId;
+		api.confirm({
+		    title: '确认发货',
+		    msg: '确定要发货吗？',
+		    buttons: ['确定', '取消']
+		}, function(ret, err){
+		    if( ret.buttonIndex == 1 ){
+				requestData('Order/yuehaoSendGoods',data,'YES','NO','NO',_callbackRelt);
+		    }
+		});
+
+	}
+	function _callbackRelt(ret){
+		if(ret.status == 200){
+			api.toast({
+				msg: ret.msg,
+				duration: 3000,
+				location: 'bottom'
+			});
+			window.location.reload();
+		}else{
+			api.toast({
+				msg: ret.msg,
+				duration: 3000,
+				location: 'bottom'
+			});
+		}
+	}
+	function getGoods(id){
+		var orderId = id;
+		var data = {};
+		data['values'] = {};
+		data['values']['orderId'] = orderId;
+		api.confirm({
+		    title: '确认收货',
+		    msg: '确定要收货吗？',
+		    buttons: ['确定', '取消']
+		}, function(ret, err){
+		    if( ret.buttonIndex == 1 ){
+				requestData('Order/yuehaoGetGoods',data,'YES','NO','NO',_callbackGRelt);
+		    }
+		});
+
+	}
+	function _callbackGRelt(ret){
+		if(ret.status == 200){
+			api.toast({
+				msg: ret.msg,
+				duration: 3000,
+				location: 'bottom'
+			});
+			window.location.reload();
+		}else{
+			api.toast({
+				msg: ret.msg,
+				duration: 3000,
+				location: 'bottom'
+			});
+		}
+	}
+	function goToPay(i){
+		var orderInfo = orderObj[i];
+		var body = orderInfo.game_name+orderInfo.game_account;
+		var subject = orderInfo.seller_name;
+		var out_trade_no = orderInfo.order_num;
+		var total_amount = orderInfo.buyer_pay;
+		var product_code = 'QUICK_MSECURITY_PAY';
+
+		goToAlipay(body,subject,out_trade_no,total_amount,product_code);
+	}
+	function goToAlipay(body,subject,out_trade_no,total_amount,product_code){
+		var data = {};
+		data['values'] = {};
+		data['values']['body'] = body;
+		data['values']['subject'] = subject;
+		data['values']['out_trade_no'] = out_trade_no;
+		data['values']['total_amount'] = total_amount;
+		data['values']['product_code'] = product_code;
+		oInfo['orderNum'] = out_trade_no;
+		oInfo['shopName'] = subject;
+		oInfo['goods'] = body;
+		oInfo['payMoney'] = total_amount;
+		requestData('Pay/aliPay',data,'NO','NO','NO',_callbackOrderInfo);
+  }
+	function _callbackOrderInfo(ret){
+		if(ret.status == 200){
+			var aliPayPlus = api.require('aliPayPlus');
+			aliPayPlus.payOrder({
+				orderInfo:htmlspecialchars_decode(ret.orderInfo)
+			},function(ret,err){
+				if(ret.code == 8000){
+					api.openWin({
+			            name: 'payErr',
+			            url: './payErr.html',
+			            pageParam:{
+			            	data:'正在处理中...请稍候！'
+			            }
+		            });
+				}else if(ret.code == 4000){
+					api.openWin({
+			            name: 'payErr',
+			            url: './payErr.html',
+			            pageParam:{
+			            	data:'订单支付失败!'
+			            }
+		            });
+				}else if(ret.code == 6001){
+					api.openWin({
+			            name: 'payErr',
+			            url: './payErr.html',
+			            pageParam:{
+			            	data:'您已经取消支付！'
+			            }
+		            });
+				}else if(ret.code == 6002){
+					api.openWin({
+			            name: 'payErr',
+			            url: './payErr.html',
+			            pageParam:{
+			            	data:'网络故障！请稍候查看'
+			            }
+		            });
+				}else if(ret.code == 9000){
+					var myDate = new Date();
+					var year = myDate.getFullYear();
+					var month = myDate.getMonth()*1+1;
+					var day = myDate.getDate();
+					var hours = myDate.getHours();
+					var minute = myDate.getMinutes();
+					var second = myDate.getSeconds();
+					oInfo['payTime'] = year+'-'+month+'-'+day+' '+hours+':'+minute+':'+second;
+					oInfo['orderType'] = 'yuehao';
+					if(oInfo){
+						api.openWin({
+				            name: 'payOk',
+				            url: './payOk.html',
+				            pageParam:{
+				            	data:oInfo
+				            }
+			            });
+					}
+				}
+			});
+		}else{
+			api.toast({
+	          msg: ret.msg,
+	          duration: 4000,
+	          location: 'bottom'
+	       });
+	       setTimeout(function(){
+	       		window.location.reload();
+	       },1000);
+		}
+	}
+	function htmlspecialchars_decode(str){
+		str = str.replace(/&amp;/g, '&');
+		str = str.replace(/&lt;/g, '<');
+		str = str.replace(/&gt;/g, '>');
+		str = str.replace(/&quot;/g, "''");
+		str = str.replace(/&#039;/g, "'");
+		return str;
+	}
+	function refund(id){
+		api.confirm({
+		    title: '退款',
+		    msg: '确定要退款吗？',
+		    buttons: ['确定', '取消']
+		}, function(ret, err){
+		    if( ret.buttonIndex == 1 ){
+		    	var dialog = new auiDialog({});
+		    	dialog.prompt({
+			        title:"退款原因",
+			        text:'请输入退款原因',
+			        buttons:['取消','提交']
+			    },function(ret){
+			        if(ret.buttonIndex == 2){
+			            var data = {};
+				    	data['values'] = {};
+				    	data['values']['orderId'] = id;
+				    	data['values']['reason'] = ret.text;
+						requestData('Order/yuehaoRefund',data,'YES','NO','NO',_callbackRefundRelt);
+			        }
+			    })
+
+		    }
+		});
+	}
+	function _callbackRefundRelt(ret){
+		api.toast({
+			msg: ret.msg,
+			duration: 4000,
+			location: 'bottom'
+		});
+		if(ret.status == 200){
+			window.location.reload();
+		}
+	}
+</script>
+</html>

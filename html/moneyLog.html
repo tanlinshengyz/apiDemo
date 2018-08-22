@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+		<link rel="stylesheet" type="text/css" href="../icon/aosen/css/font-awesome.min.css" />
+    <style>
+    	body,html{
+				background:#EEEEEE
+    	}
+      .aui-list-item{
+        height:3rem !important;
+      }
+    </style>
+</head>
+<body>
+  <div class="aui-content">
+      <ul class="aui-list aui-media-list" id="list">
+				<!-- <li class="aui-list-item aui-list-item-middle">
+          <div class="aui-media-list-item-inner">
+            <div class="aui-list-item-inner">
+              <div class="aui-list-item-text">
+                <div class="aui-list-item-title aui-font-size-14">提现</div>
+                <div class="aui-list-item-right" style="color:red">收入</div>
+              </div>
+              <div class="aui-list-item-text">
+								<div class="aui-list-item-left">2018-4-27</div>
+                <div class="aui-list-item-right" style="color:red">&yen;50.00</div>
+              </div>
+            </div>
+          </div>
+        </li> -->
+      </ul>
+  </div>
+	<div class="aui-hide" id="noData" style="text-align: center">
+		<img src="../image/nodata.jpg"/>
+		<span>暂无数据~~</span>
+	</div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/request.js"></script>
+<script type="text/javascript">
+  var userId;
+  var userInfo;
+	apiready = function(){
+		userId = $api.getStorage('userId');
+
+		getList();
+	};
+	function getList(){
+		var data = {};
+		data['values'] = {};
+		data['values']['userId'] = userId;
+		requestData('Money/getMoneyLog',data,'NO','NO','NO',_callbackList);
+	}
+	function _callbackList(ret){
+		if(ret.status == 200){
+			if(ret.list.length>0){
+				$api.addCls($api.byId('noData'), 'aui-hide');
+				var html='';
+				for(var i=0;i<ret.list.length;i++){
+					html+='<li class="aui-list-item aui-list-item-middle">';
+					html+='<div class="aui-media-list-item-inner">';
+					html+='<div class="aui-list-item-inner">';
+					html+='<div class="aui-list-item-text">';
+					html+='<div class="aui-list-item-title aui-font-size-14">'+ret.list[i].source+'</div>';
+					if(ret.list[i].inOrOut == 'in'){
+						html+='<div class="aui-list-item-right" style="color:red">收入</div>';
+					}else{
+						html+='<div class="aui-list-item-right" style="color:green">转出</div>';
+					}
+					html+='</div>';
+					html+='<div class="aui-list-item-text">';
+					html+='<div class="aui-list-item-left">'+ret.list[i].time+'</div>';
+					html+='<div class="aui-list-item-right" style="color:red">&yen;'+ret.list[i].money+'</div>';
+					html+='</div>';
+					html+='</div>';
+					html+='</div>';
+					html+='</li>';
+				}
+				$api.html($api.byId('list'), html);
+
+			}else{
+				$api.removeCls($api.byId('noData'), 'aui-hide');
+			}
+		}else{
+			$api.removeCls($api.byId('noData'), 'aui-hide');
+
+		}
+	}
+</script>
+</html>
