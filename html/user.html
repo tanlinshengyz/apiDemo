@@ -1,106 +1,142 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>title</title>
-    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
-    <link rel="stylesheet" type="text/css" href="../icon/aosen/css/font-awesome.min.css" />
-    <style>
-    	body,html{
-			background:#EEEEEE
-    	}
-    	.user-msg{
-    		width:100%;
-    		height:9.5rem;
-    		background: -webkit-linear-gradient(#f33d2f, #fb7f4e);
-			background: -o-linear-gradient(#f33d2f, #fb7f4e);
-			background: -moz-linear-gradient(#f33d2f, #fb7f4e);
-			background: linear-gradient(#f33d2f, #fb7f4e);
-			display:flex;
-			display:-webkit-flex;
-			flex-direction: column;
-			-webkit-justify-content: center;
-    		justify-content: center;
-    	}
-    	.user-header-box{
-    		width:100%;
-    		height:5rem;
-    		display:flex;
-			display:-webkit-flex;
-			-webkit-justify-content: center;
-    		justify-content: center;
-    	}
-    	.user-name{
-    		width:100%;
-    		height:2rem;
-    		text-align:center;
-    		line-height: 2rem;
-    		color:white;
-    	}
-    	.user-header{
-    		width:5rem;
-    		height:5rem;
-    		border-radius:50%;
-    		background:rgba(255,255,255,0.2)
-    	}
-    	.user-header div{
-    		width:4rem;
-    		height:4rem;
-    		margin:0.5rem auto;
-    		border-radius:50%;
-    		overflow:hidden;
-    		background:white
-    	}
-    	.user-header div img{
-    		width:100%;
-    		height:100%;
-    		display:block;
-    	}
-    	.money-manage{
-    		width:100%;
-    		height:2.5rem;
-    		background:white;
-    		line-height:2.5rem;
-				padding-left: 48px;
-    	}
-    	.aui-grid{
-    		border-top:1px solid #eee;
-    	}
-    	#kefu{
-    	width: 2.5rem;
-    	height: 2.5rem;
-    	border-radius: 50%;
-    	background: #ff4800;
-    	position: absolute;
-    	bottom: 3rem;
-    	right: 0;
-    	touch-action: none;
-    	overflow:hidden;
-    }
-    #kefu img{
-    	width:90%;
-    	height:80%;
-    	display:block;
-    	margin: 0 auto;
-    	margin-top:0.25rem;
-    }
-		.gai{
-			margin:0 auto;
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"
+	/>
+	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<title>title</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+	<link rel="stylesheet" type="text/css" href="../icon/aosen/css/font-awesome.min.css" />
+	<style>
+		body,
+		html {
+			background: #EEEEEE
+		}
+
+		.user-msg {
+			width: 100%;
+			height: 9.5rem;
+			background: url(../image/imgProduct/bj2@2x.png) no-repeat;
+			background-size: cover;
+			display: flex;
+			display: -webkit-flex;
+			align-items: center;
+			padding: 1rem 0.8rem 0;
+		}
+
+		.user-wrap {
+			width: 100%;
+			height: 6.5rem;
+			background: #fff;
+			border-radius: 6px;
+			display: flex;
+			align-items: center;
+		}
+
+		.user-header-box {
+			width: 5rem;
+			height: 5rem;
+			display: flex;
+		}
+
+		.user-name {
+			width: 100%;
+			height: 2rem;
+			line-height: 2rem;
+			color: white;
+		}
+
+		.user-header {
+			width: 5rem;
+			height: 5rem;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.2)
+		}
+
+		.user-header div {
+			width: 4rem;
+			height: 4rem;
+			margin: 0.5rem auto;
+			border-radius: 50%;
+			overflow: hidden;
+			background: white
+		}
+
+		.user-header div img {
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+
+		.header-btns {
+			margin-bottom: 0.8rem;
+			display: flex;
+			align-items: center;
+		}
+
+		.header-btns .btn {
+			width: 4.2rem;
+			height: 1.5rem;
+			line-height: 1.5rem;
+			text-align: center;
+			color: #fff;
+			font-weight: 600;
+			background: #fa4403;
+			margin-right: 0.8rem;
+			border-radius: 4px;
+		}
+
+		.money-manage {
+			width: 100%;
+			height: 2.5rem;
+			background: white;
+			line-height: 2.5rem;
+			padding-left: 20px;
+		}
+
+		.aui-grid {
+			border-top: 1px solid #eee;
+		}
+
+		#kefu {
+			width: 2.5rem;
+			height: 2.5rem;
+			border-radius: 50%;
+			background: #ff4800;
+			position: absolute;
+			bottom: 3rem;
+			right: 0;
+			touch-action: none;
+			overflow: hidden;
+		}
+
+		#kefu img {
+			width: 90%;
+			height: 80%;
+			display: block;
+			margin: 0 auto;
+			margin-top: 0.25rem;
+		}
+
+		.gai {
+			margin: 0 auto;
 			position: relative;
 			top: -30px;
 			left: 1.5rem;
 		}
-		.cash_manage{
-		width: 2em;
-		height: 2em;
-		display: inline-block;
-		vertical-align: -10px;
-		margin-left: -35px;
-		margin-right: 0.3rem;
+
+		.cash_manage {
+			width: 2em;
+			height: 2em;
+			display: inline-block;
+			vertical-align: -10px;
+			margin-left: -35px;
+			margin-right: 0.3rem;
 		}
+
 		/*.order_manage{
 			width: 2em;
 			height: 2em;
@@ -111,62 +147,73 @@
 			height: 2em;
 			display: inline-block;
 		}*/
-		.withdraw_cash{
+
+		.withdraw_cash {
 			width: 26px;
 			height: 25px;
 			margin: 12px auto;
 		}
-		.cash_details{
+
+		.cash_details {
 			width: 20px;
 			height: 25px;
 			margin: 12px auto;
 		}
-		.todo_pay{
+
+		.todo_pay {
 			width: 24px;
 			height: 20px;
 			margin: 11px auto;
 		}
-    </style>
+	</style>
 </head>
+
 <body>
 	<div class="user-msg" onclick="userEdit()">
-		<div class="user-header-box">
-			<div class="user-header">
-				<div>
-					<img src="" id="header"/>
+		<div class="user-wrap">
+			<div class="user-header-box">
+				<div class="user-header">
+					<div>
+						<img src="" id="header" />
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="user-name">
+					<p id="userName"></p>
+					<p>我的余额:
+						<span class="" style="color: red;padding-top:0.4rem;" id="money">0.00</span>
+					</p>
+					<!-- <i class="fa fa-edit" style="margin-left: 0.3rem;color: black"></i> -->
+					<!-- <img src="../image/gai.png" alt="" class="gai"> -->
+				</div>
+				<div class="header-btns">
+					<div class="btn">提现</div>
+					<div class="btn">资金明细</div>
 				</div>
 			</div>
 		</div>
-		<div class="user-name">
-			<span id="userName"></span>
-			<!-- <i class="fa fa-edit" style="margin-left: 0.3rem;color: black"></i> -->
-			<img src="../image/gai.png" alt="" class="gai">
-		</div>
 	</div>
-	<div class="money-manage aui-margin-t-10">
-		<!-- <i class="fa fa-money" style="margin:0 0.3rem 0 0.8rem;color: #1d7dfd"></i> -->
-		<img src="../image/cash_manage.jpg" alt="" class="cash_manage">
-		资金管理
+	<!-- <div class="money-manage aui-margin-t-10">
+		<img src="../image/cash_manage.jpg" alt="" class="cash_manage"> 资金管理
 	</div>
 	<section class="aui-grid" style="">
-  		<div class="aui-row" style="margin-top: 0; font-size: 7vw">
-  			<div class="aui-col-xs-4" style="margin:0.5rem 0;padding:0">
-	            <span class="" style="color: red;padding-top:0.4rem;" id="money">0.00</span>
-	            <div class="aui-grid-label">可用余额</div>
-	        </div>
-	        <div class="aui-col-xs-4" style="margin:0.5rem 0;padding:0;border-left: 1px solid #eee;border-right: 1px solid #eee" onclick="getMoney()">
-	            <!-- <i class="fa fa-rmb" style="color: #41c522"></i> -->
-							<img src="../image/withdraw_cash.jpg" alt="" class="withdraw_cash">
-	            <div class="aui-grid-label">提现</div>
-	        </div>
-	        <div class="aui-col-xs-4" style="margin:0.5rem 0;padding:0" onclick="moneyLog()">
-	            <!-- <i class="fa fa-book" style="color: #6f9fdf"></i> -->
-							<img src="../image/cash_details.jpg" alt="" class="cash_details">
-	            <div class="aui-grid-label">资金明细</div>
-	        </div>
-  		</div>
-  	</section>
-  	<!-- <section class="aui-grid" style="">
+		<div class="aui-row" style="margin-top: 0; font-size: 7vw">
+			<div class="aui-col-xs-4" style="margin:0.5rem 0;padding:0">
+				<span class="" style="color: red;padding-top:0.4rem;" id="money">0.00</span>
+				<div class="aui-grid-label">可用余额</div>
+			</div>
+			<div class="aui-col-xs-4" style="margin:0.5rem 0;padding:0;border-left: 1px solid #eee;border-right: 1px solid #eee" onclick="getMoney()">
+				<img src="../image/withdraw_cash.jpg" alt="" class="withdraw_cash">
+				<div class="aui-grid-label">提现</div>
+			</div>
+			<div class="aui-col-xs-4" style="margin:0.5rem 0;padding:0" onclick="moneyLog()">
+				<img src="../image/cash_details.jpg" alt="" class="cash_details">
+				<div class="aui-grid-label">资金明细</div>
+			</div>
+		</div>
+	</section> -->
+	<!-- <section class="aui-grid" style="">
   		<div class="aui-row" style="margin-top: 0; font-size: 7vw">
 	        <div class="aui-col-xs-4" style="margin:0.5rem 0;padding:0;border-right: 1px solid #eee">
 	            <i class="fa fa-laptop" style="color: #f75f40"></i>
@@ -175,57 +222,61 @@
 
   		</div>
   	</section> -->
-		<div class="money-manage aui-margin-t-10">
-			<!-- <i class="fa fa-table" style="margin:0 0.3rem 0 0.8rem;color: #5bc62a"></i> -->
-			<img src="../image/order_manage.jpg" alt="" class="cash_manage">
-			订单管理
+	<div class="money-manage aui-margin-t-10">
+		<!-- <i class="fa fa-table" style="margin:0 0.3rem 0 0.8rem;color: #5bc62a"></i> -->
+		<!-- <img src="../image/order_manage.jpg" alt="" class="cash_manage"> -->
+		订单管理
+	</div>
+	<section class="aui-grid" style="border-bottom: 1px solid #eee">
+		<div class="aui-row" style="margin-top: 0; font-size: 6vw;">
+			<div class="aui-col-xs-3" style="margin:0.5rem 0;padding:0" onclick="orderList(0)">
+				<!-- <i class="fa fa-rmb" style="color: #fc5c4e"></i> -->
+				<img src="../image/imgProduct/wo_icon_dfk@2x.png" alt="" class="todo_pay">
+				<!-- <img src="../image/todo_pay.jpg" alt="" class="todo_pay"> -->
+				<div class="aui-grid-label">待付款</div>
+			</div>
+			<div class="aui-col-xs-3" style="margin:0.5rem 0;padding:0;" onclick="orderList(1)">
+				<!-- <i class="fa fa-truck" style="color: #fe942e"></i> -->
+				<!-- <img src="../image/deliver_goods.jpg" alt="" class="todo_pay"> -->
+				<img src="../image/imgProduct/wode_icon_fahuo@2x.png" alt="" class="todo_pay">
+				<div class="aui-grid-label">待发货</div>
+			</div>
+			<div class="aui-col-xs-3" style="margin:0.5rem 0;padding:0;" onclick="orderList(2)">
+				<!-- <i class="fa fa-archive" style="color: #918fe3"></i> -->
+				<!-- <img src="../image/todo_receive.jpg" alt="" class="todo_pay"> -->
+				<img src="../image/imgProduct/wode_icon_dsh@2x.png" alt="" class="todo_pay">
+				<div class="aui-grid-label">待收货</div>
+			</div>
+			<div class="aui-col-xs-3" style="margin:0.5rem 0;padding:0" onclick="orderList(4)">
+				<!-- <i class="fa fa-angellist" style="color: #5bc62a"></i> -->
+				<!-- <img src="../image/grade_successful.jpg" alt="" class="todo_pay"> -->
+				<img src="../image/imgProduct/wode_dpj@2x.png" alt="" class="todo_pay">
+				<div class="aui-grid-label">交易成功</div>
+			</div>
 		</div>
-		<section class="aui-grid" style="border-bottom: 1px solid #eee">
-	  		<div class="aui-row" style="margin-top: 0; font-size: 6vw">
-	  			<div class="aui-col-xs-3" style="margin:0.5rem 0;padding:0" onclick="orderList(0)">
-		            <!-- <i class="fa fa-rmb" style="color: #fc5c4e"></i> -->
-								<img src="../image/todo_pay.jpg" alt="" class="todo_pay">
-		            <div class="aui-grid-label">待付款</div>
-		        </div>
-		        <div class="aui-col-xs-3" style="margin:0.5rem 0;padding:0;border-left: 1px solid #eee;border-right: 1px solid #eee" onclick="orderList(1)">
-		            <!-- <i class="fa fa-truck" style="color: #fe942e"></i> -->
-								<img src="../image/deliver_goods.jpg" alt="" class="todo_pay">
-		            <div class="aui-grid-label">待发货</div>
-		        </div>
-		        <div class="aui-col-xs-3" style="margin:0.5rem 0;padding:0;border-right: 1px solid #eee" onclick="orderList(2)">
-		            <!-- <i class="fa fa-archive" style="color: #918fe3"></i> -->
-								<img src="../image/todo_receive.jpg" alt="" class="todo_pay">
-		            <div class="aui-grid-label">待收货</div>
-		        </div>
-						<div class="aui-col-xs-3" style="margin:0.5rem 0;padding:0" onclick="orderList(4)">
-		            <!-- <i class="fa fa-angellist" style="color: #5bc62a"></i> -->
-								<img src="../image/grade_successful.jpg" alt="" class="todo_pay">
-		            <div class="aui-grid-label">交易成功</div>
-		        </div>
-	  		</div>
-	  	</section>
-	  	<div class="money-manage aui-margin-t-10">
-			<!-- <i class="fa fa-table" style="margin:0 0.3rem 0 0.8rem;color: yellow"></i> -->
-			<img src="../image/yue.jpg" alt="" class="cash_manage">
-			约好交易单
+	</section>
+	<div class="money-manage aui-margin-t-10">
+		<!-- <i class="fa fa-table" style="margin:0 0.3rem 0 0.8rem;color: yellow"></i> -->
+		<!-- <img src="../image/yue.jpg" alt="" class="cash_manage"> -->
+		约好交易单
+	</div>
+	<section class="aui-grid" style="border-bottom: 1px solid #eee;">
+		<div class="aui-row" style="margin-top: 0; font-size: 6vw">
+			<div class="aui-col-xs-12" style="padding:1rem 0;padding:0;border-right: 1px solid #eee;display:block;" onclick="yuehaoOrderList(0)">
+				<!-- <i class="fa fa-user" style="color: #918fe3"></i> -->
+				<!-- <img src="../image/mairu.jpg" alt="" class="todo_pay"> -->
+				<div class="aui-grid-label" style="padding:0.5rem 0;text-align:left;padding-left:20px;font-size:16px;font-weight:bolder;border-bottom:1px solid #eee;"> 约好买入</div>
+			</div>
+			<div class="aui-col-xs-12" style="padding:1rem 0;padding:0;display:block;" onclick="yuehaoOrderList(1)">
+				<!-- <i class="fa fa-bank" style="color: #5bc62a"></i> -->
+				<!-- <img src="../image/maichu.jpg" alt="" class="todo_pay"> -->
+				<div class="aui-grid-label" style="padding:0.5rem 0;text-align:left;padding-left:20px;font-size:16px;font-weight:bolder;border-bottom:1px solid #eee;"> 约好卖出</div>
+			</div>
 		</div>
-		<section class="aui-grid" style="border-bottom: 1px solid #eee">
-	  		<div class="aui-row" style="margin-top: 0; font-size: 6vw">
-		        <div class="aui-col-xs-3" style="margin:0.5rem 0;padding:0;border-right: 1px solid #eee" onclick="yuehaoOrderList(0)">
-		            <!-- <i class="fa fa-user" style="color: #918fe3"></i> -->
-								<img src="../image/mairu.jpg" alt="" class="todo_pay">
-		            <div class="aui-grid-label">买入</div>
-		        </div>
-						<div class="aui-col-xs-3" style="margin:0.5rem 0;padding:0" onclick="yuehaoOrderList(1)">
-		            <!-- <i class="fa fa-bank" style="color: #5bc62a"></i> -->
-								<img src="../image/maichu.jpg" alt="" class="todo_pay">
-		            <div class="aui-grid-label">卖出</div>
-		        </div>
-	  		</div>
-	  	</section>
-	  	<div id="kefu" onclick="openServicePer()">
-	  	<img src="../icon/kefu.png"/>
-	  </div>
+	</section>
+	<div id="kefu" onclick="openServicePer()">
+		<img src="../icon/kefu.png" />
+	</div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/request.js"></script>
@@ -235,111 +286,119 @@
 	var userId;
 	var userInfo;
 	var moneyInfo;
-	apiready = function(){
+	apiready = function () {
 		userId = $api.getStorage('userId');
 		api.addEventListener({
-		    name: 'reload'
-		}, function(ret, err){
-				window.location.reload();
+			name: 'reload'
+		}, function (ret, err) {
+			window.location.reload();
 		});
 
 		api.setRefreshHeaderInfo({
-		    loadingImg: 'widget://image/refresh.png',
-		    bgColor: 'rgba(0,0,0,0)',
-		    textColor: 'rgb(150,150,150)',
-		    textDown: '下拉刷新...',
-		    textUp: '松开刷新...'
-		}, function(ret, err) {
-		    getIntData('YES','YES');
+			loadingImg: 'widget://image/refresh.png',
+			bgColor: 'rgba(0,0,0,0)',
+			textColor: 'rgb(150,150,150)',
+			textDown: '下拉刷新...',
+			textUp: '松开刷新...'
+		}, function (ret, err) {
+			getIntData('YES', 'YES');
 
 		});
-		if(userId){
-		getIntData('NO','NO');
-	}
+		if (userId) {
+			getIntData('NO', 'NO');
+		}
 	};
-	function getIntData(loading,isDown){
+
+	function getIntData(loading, isDown) {
 		var data = {};
 		data['values'] = {};
-		data['values']['userId'] =userId;
-		requestData('Users/getUserMsg',data,loading,'NO',isDown,_callbackData);
+		data['values']['userId'] = userId;
+		requestData('Users/getUserMsg', data, loading, 'NO', isDown, _callbackData);
 	}
-	function _callbackData(ret){
-		if(ret.status == 200){
+
+	function _callbackData(ret) {
+		if (ret.status == 200) {
 			userInfo = ret.user;
 			moneyInfo = ret.money;
 			var imgObj = new Image();
-			imgObj.src = pictureUrl+ret.user.user_header;
-			imgObj.onload = function(){
-				$api.attr($api.byId('header'), 'src', pictureUrl+ret.user.user_header);
+			imgObj.src = pictureUrl + ret.user.user_header;
+			imgObj.onload = function () {
+				$api.attr($api.byId('header'), 'src', pictureUrl + ret.user.user_header);
 			}
-			imgObj.onerror = function(){
+			imgObj.onerror = function () {
 				$api.attr($api.byId('header'), 'src', '../image/defaultHeader.jpg');
 			}
 			$api.text($api.byId('userName'), ret.user.user_name);
 			$api.text($api.byId('money'), ret.money.money);
 		}
 	}
-	function userEdit(){
+
+	function userEdit() {
 		api.openWin({
-	        name: 'userEdit',
-	        url: './win.html',
-	        pageParam: {
-	            page:'userEdit',
-	            title: '个人资料',
-	            data:userInfo
-	        }
-	    });
+			name: 'userEdit',
+			url: './win.html',
+			pageParam: {
+				page: 'userEdit',
+				title: '个人资料',
+				data: userInfo
+			}
+		});
 	}
-	function getMoney(){
-		if(userInfo.alipay_num == ''||userInfo.alipay_num == undefined||userInfo.alipay_num==null){
-			if(userInfo.wx_num == ''||userInfo.wx_num == undefined||userInfo.wx_num==null){
-				if(userInfo.bank_num == ''||userInfo.bank_num == undefined||userInfo.bank_num==null){
+
+	function getMoney() {
+		if (userInfo.alipay_num == '' || userInfo.alipay_num == undefined || userInfo.alipay_num == null) {
+			if (userInfo.wx_num == '' || userInfo.wx_num == undefined || userInfo.wx_num == null) {
+				if (userInfo.bank_num == '' || userInfo.bank_num == undefined || userInfo.bank_num == null) {
 					alert('您还没有添加任何可收款账户，请到个人中心设置后，下拉刷新此页面再进行提现操作！谢谢配合！');
 					return false;
 				}
 			}
 		}
 		api.openWin({
-	        name: 'getMoney',
-	        url: './win.html',
-	        pageParam: {
-	            page:'getMoney',
-	            title: '提现',
-	            data:moneyInfo
-	        }
-	    });
+			name: 'getMoney',
+			url: './win.html',
+			pageParam: {
+				page: 'getMoney',
+				title: '提现',
+				data: moneyInfo
+			}
+		});
 	}
-	function moneyLog(){
+
+	function moneyLog() {
 		api.openWin({
-        name: 'moneyLog',
-        url: './win.html',
-        pageParam: {
-            page:'moneyLog',
-            title: '资金明细',
-        }
-    });
+			name: 'moneyLog',
+			url: './win.html',
+			pageParam: {
+				page: 'moneyLog',
+				title: '资金明细',
+			}
+		});
 	}
-	function orderList(index){
+
+	function orderList(index) {
 		api.openWin({
-        name: 'orderList',
-        url: './win.html',
-        pageParam: {
-            page:'orderList',
-            title: '订单列表',
-            data:index,
-        }
-    });
+			name: 'orderList',
+			url: './win.html',
+			pageParam: {
+				page: 'orderList',
+				title: '订单列表',
+				data: index,
+			}
+		});
 	}
-	function yuehaoOrderList(index){
+
+	function yuehaoOrderList(index) {
 		api.openWin({
-	        name: 'yuehaoOrderList',
-	        url: './win.html',
-	        pageParam: {
-	            page:'yuehaoOrderList',
-	            title: '约好订单列表',
-	            data:index,
-	        }
-	    });
+			name: 'yuehaoOrderList',
+			url: './win.html',
+			pageParam: {
+				page: 'yuehaoOrderList',
+				title: '约好订单列表',
+				data: index,
+			}
+		});
 	}
 </script>
+
 </html>
