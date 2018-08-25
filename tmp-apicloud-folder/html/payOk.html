@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>PAGE</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/uz.css" />
+    <style>
+        html,body {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            background-color: #F6F6F6;
+        }
+
+        .pay-icon-box {
+            padding: 45px 30px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .pay-icon-box>img {
+            display: inline;
+        }
+
+        .pay-title {
+            font-size: 30px;
+            color: #0062CC;
+        }
+
+        .info-box {
+            padding: 30px;
+        }
+
+        .info-row {
+            font-size: 14px;
+            color: #666666;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .my-btn-box {}
+    </style>
+</head>
+
+<body>
+    <div id="statusBar"></div>
+    <div class="pay-icon-box">
+        <img src="../image/pay_ok.png" width="30%" />
+        <div class="pay-title">支付成功</div>
+    </div>
+    <div class="aui-hr"></div>
+    <div class="info-box" id="orderInfo">
+        <div class="info-row aui-f">
+            <span class="aui-pull-left">订单编号</span>
+            <span class="aui-pull-right" id="order-num"></span>
+        </div>
+        <div class="info-row">
+            <span class="aui-pull-left">支付金额</span>
+            <span class="aui-pull-right" id="order-money"></span>
+        </div>
+        <div class="info-row">
+            <span class="aui-pull-left">商家名称</span>
+            <span class="aui-pull-right" id="order-shop"></span>
+        </div>
+        <div class="info-row">
+            <span class="aui-pull-left">产品描述</span>
+            <span class="aui-pull-right" id="order-goods"></span>
+        </div>
+        <div class="info-row">
+            <span class="aui-pull-left">支付时间</span>
+            <span class="aui-pull-right" id="order-time"></span>
+        </div>
+    </div>
+    <div class="aui-hr"></div>
+    <div class="my-btn-box">
+        <div class="aui-btn aui-btn-block" onclick="submit();" style="background: #e14104;color: white" tapmode>确定</div>
+        <!-- <div class="aui-btn aui-btn-block" onclick="connectSeller();" style="background: #e14104;color: white" tapmode>联系卖家</div> -->
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/request.js"></script>
+<script type="text/javascript">
+    var obj;
+    apiready = function() {
+        var header = $api.byId('statusBar');
+        $api.fixStatusBar(header);
+        obj = api.pageParam.data;
+        setInfo();
+        api.addEventListener({
+	        name:'keyback'
+        },function(ret,err){
+        	submit();
+        });
+    };
+
+    function setInfo() {
+        if (obj.orderNum != "") {
+            $api.text($api.byId('order-num'), obj.orderNum);
+            $api.text($api.byId('order-money'), obj.payMoney);
+            $api.text($api.byId('order-shop'), obj.shopName);
+            $api.text($api.byId('order-goods'), obj.goods);
+            $api.text($api.byId('order-time'), obj.payTime);
+        }
+
+    }
+
+    function submit() {
+    	var data = {};
+    	data['values'] = {};
+    	data['values']['orderNum'] = obj.orderNum;
+    	data['values']['payMoney'] = obj.payMoney;
+    	data['values']['payTime'] = obj.payTime;
+    	data['values']['orderType'] = obj.orderType;
+      data['values']['userId'] = $api.getStorage('userId');
+
+    	requestData('Pay/getPayRelt',data,'YES','NO','NO',_callbackRelt);
+    }
+    function _callbackRelt(ret){
+    	if(ret.status == 200){
+    		api.toast({
+	          msg: ret.msg,
+	          duration: 4000,
+	          location: 'bottom'
+	       });
+         api.sendEvent({
+             name: 'reload',
+
+         });
+        if(obj.orderType == 'yuehao'){
+          api.sendEvent({
+              name: 'goToChatRoom',
+              extra: {
+                  sellerInfo: ret.sellerInfo,
+              }
+          });
+
+        }
+	       setTimeout(function(){
+	       		api.closeWin();
+	       },1000);
+    	}else{
+    		api.toast({
+	          msg: ret.msg,
+	          duration: 4000,
+	          location: 'bottom'
+	       });
+	       setTimeout(function(){
+	       		api.closeWin();
+	       },1000);
+    	}
+    }
+</script>
+</html>

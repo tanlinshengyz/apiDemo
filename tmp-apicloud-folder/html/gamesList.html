@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <style>
+    	body,html{
+
+    	}
+    	.gameImg{
+	    	width:3rem;
+	    	height:3rem;
+	    	border-radius: 10px;
+	    	overflow:hidden;
+	    	margin:0 auto;
+	    	overflow:hidden;
+	    }
+	    .gameImg img{
+	    	width:100%;
+	    	height:100%;
+	    	display:block;
+	    }
+    </style>
+</head>
+<body>
+	<section class="aui-grid" style="">
+  		<div class="aui-row" style="margin-top: 0" id="goodsBox">
+  			<!--<div class="aui-col-xs-4" style="padding:0.5rem 0" onclick="goToProductList()">
+	            <div class="gameImg">
+	            	<img src="../image/box.png"/>
+	            </div>
+	            <div class="aui-grid-label">游戏名</div>
+	        </div>-->
+  		</div>
+  	</section>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/request.js"></script>
+<script type="text/javascript">
+	var chooseLetter,productType;
+	var shopName;
+	apiready = function(){
+		// chooseLetter = api.pageParam.chooseLetter;
+		// productType = api.pageParam.productType;
+		getGameList();
+	};
+	function goToProductList(id,userType){
+		if(userType == 'shop'){
+			api.openWin({
+				name: 'shopDetail',
+				url: './win.html',
+				pageParam: {
+						page:'shopDetail',
+						title: '商家店铺',
+	          data:{
+	          	id:id,
+	          },
+	          bounces:true
+					}
+			});
+		}else{
+			api.openWin({
+					name: 'ProductListPage',
+					url: './win.html',
+					pageParam: {
+							page:'ProductListPage',
+							title: '商品列表',
+							data:{
+								id:id,
+								userType:userType
+							},
+							bounces:true
+					}
+			});
+		}
+	}
+	function getGameList(){
+		var data = {};
+		data['values'] = {};
+		// data['values']['chooseLetter'] = chooseLetter;
+		// if(chooseLetter == '热门'){
+		// 	data['values']['chooseLetter'] = 'ALL';
+		// }
+		// data['values']['productType'] = productType;
+		requestData('Goods/getGoodsList1',data,'NO','NO','NO',_callbackList);
+	}
+	function _callbackList(ret){
+		console.log(ret);
+		if(ret.status == 200){
+			if(ret.list.length>0){
+				var html = '';
+				for(var i=0;i<ret.list.length;i++){
+					html+='<div class="aui-col-xs-4" style="padding:0.5rem 0" onclick="goToProductList('+ret.list[i].id+',\''+ret.list[i].userType+'\')">';
+					html+='<div class="gameImg">';
+					html+='<img src="'+pictureUrl+ret.list[i].game_ico+'"/>';
+					html+='</div>';
+					html+='<div class="aui-grid-label">'+ret.list[i].game_name+'</div>';
+					shopName = ret.list[i].name;
+					html+='</div>';
+				}
+				$api.html($api.byId('goodsBox'), html);
+			}
+		}
+	}
+</script>
+</html>

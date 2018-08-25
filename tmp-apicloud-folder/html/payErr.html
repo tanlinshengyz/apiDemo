@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>PAGE</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/uz.css" />
+    <style>
+        html,body {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            background-color: #F6F6F6;
+        }
+
+        .pay-icon-box {
+            padding: 45px 30px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .pay-icon-box>img {
+            display: inline;
+        }
+
+        .pay-title {
+            font-size: 30px;
+            color: #0062CC;
+        }
+
+        .info-box {
+            padding: 30px;
+        }
+
+        .info-row {
+            font-size: 14px;
+            color: #666666;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        .my-btn-box {}
+    </style>
+</head>
+
+<body>
+    <div id="statusBar"></div>
+    <div class="pay-icon-box">
+        <img src="../image/pay_err.png" width="30%" />
+        <div class="pay-title">支付失败</div>
+    </div>
+    <div class="aui-hr"></div>
+    <div class="info-box">
+        <div class="info-row" id="order-err">
+			支付失败
+        </div>
+    </div>
+    <div class="aui-hr"></div>
+    <div class="my-btn-box">
+        <div class="aui-btn aui-btn-default aui-btn-block" onclick="closeWin();" tapmode>返回</div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/url.js"></script>
+<script type="text/javascript">
+    var obj;
+    apiready = function() {
+        var header = $api.byId('statusBar');
+        $api.fixStatusBar(header);
+        obj = api.pageParam.data;
+        setInfo();
+    };
+
+    function setInfo() {
+        $api.text($api.byId('order-err'), obj);
+    }
+
+    function closeWin() {
+        api.closeWin({
+        });
+    }
+</script>
+</html>

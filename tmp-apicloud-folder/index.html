@@ -1,0 +1,432 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="./css/api.css" />
+    <link rel="stylesheet" type="text/css" href="./css/aui.css" />
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+        }
+        .content{
+        	width:100%;
+        	height:100%;
+        	position:relative;
+        	overflow:hidden;
+        }
+        .my-bg{
+        	padding-top:1.2rem;
+        	width:100%;
+        	height:100%;
+        }
+        .my-bg img{
+        	width:100%;
+        	height:100%;
+        	display:block;
+        }
+        .my-button-deal{
+        	width:35.89%;
+        	height:6.35%;
+        	background:rgb(254,112,37);
+        	position:absolute;
+        	bottom:5.2%;
+        	border-radius:1.7rem;
+        	text-align:center;
+        	color:white;
+        	font-size:4.2vw
+        }
+        .deal-left{
+        	left:8.03%;
+        }
+        .deal-right{
+        	right:8.03%;
+        }
+        .my-icon-box{
+          /*width:20%;*/
+          position:absolute;
+          border-radius: 50%;
+          opacity:0;
+          top:52%;
+          left:52%
+        }
+        .inside-circal{
+          width:60%;
+        	height:60%;
+          position:absolute;
+    			top:20%;
+    			left:20%;
+          border-radius: 15%;
+          overflow:hidden;
+        }
+        .inside-circal img{
+        	width:100%;
+        	height:100%;
+        	display:block;
+        }
+        .my-icon-box-bg-1{
+        	background: -webkit-linear-gradient(#ff99c2, rgba(0,0,0,0));
+    			background: -o-linear-gradient(#ff99c2, rgba(0,0,0,0));
+    			background: -moz-linear-gradient(#ff99c2, rgba(0,0,0,0));
+    			background: linear-gradient(#ff99c2, rgba(0,0,0,0));
+        }
+        .my-icon-box-bg-2{
+        	background: -webkit-linear-gradient(#95f5a4, rgba(0,0,0,0));
+    			background: -o-linear-gradient(#95f5a4, rgba(0,0,0,0));
+    			background: -moz-linear-gradient(#95f5a4, rgba(0,0,0,0));
+    			background: linear-gradient(#95f5a4, rgba(0,0,0,0));
+        }
+        .my-icon-box-bg-3{
+        	background: -webkit-linear-gradient(#ffbf6d, rgba(0,0,0,0));
+    			background: -o-linear-gradient(#ffbf6d, rgba(0,0,0,0));
+    			background: -moz-linear-gradient(#ffbf6d, rgba(0,0,0,0));
+    			background: linear-gradient(#ffbf6d, rgba(0,0,0,0));
+        }
+        .my-icon-box-bg-4{
+        	background: -webkit-linear-gradient(#a0dcff, rgba(0,0,0,0));
+    			background: -o-linear-gradient(#a0dcff, rgba(0,0,0,0));
+    			background: -moz-linear-gradient(#a0dcff, rgba(0,0,0,0));
+    			background: linear-gradient(#a0dcff, rgba(0,0,0,0));
+        }
+        .whiteButton{
+        	position:absolute;
+        	top:52%;
+        	left:52%;
+        	background:rgba(255,255,255,0.7);
+        	border-radius: 50%;
+        	width:15%;
+        	/*height:3rem;*/
+        }
+        .wave {
+            position: absolute;
+            top:50%;
+        	left:50%;
+            width: 240%;
+            height: 240%;
+            margin-left:-120%;
+            margin-top:-120%;
+        }
+
+        .wave .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+
+        /* 波动效果 */
+        .wave.solid .circle{
+            width: 100%;
+            height: 100%;
+            background: #fff;
+        }
+
+        .wave.solid .circle:first-child {
+            animation: circle-opacity 2s infinite;
+        }
+        .wave.solid.warning {
+            color: white;
+        }
+
+        .wave.solid.warning .circle{
+            background: white;
+        }
+
+        @keyframes circle-opacity{
+            from {
+                opacity: 0.7;
+                transform: scale(0.4);
+            }
+            to {
+                opacity: 0;
+                transform: scale(1);
+            }
+        }
+        .ball{
+        	width:2%;
+        	position:absolute;
+
+        	border-radius: 50%;
+
+        }
+        @keyframes ball1moveX{
+            0% {left: -33%;}
+            100% {left: 34.5%;}
+        }
+        @keyframes ball1moveY{
+            0% {top: -20%;}
+            100% {top: 21.5%;}
+        }
+        .ball1{
+        	top:21.5%;
+        	left:0;
+        	background:#ffc1cd;
+        	animation: ball1moveX 2s cubic-bezier(0.36,0,0.64,1) -1s infinite alternate, ball1moveY 2s cubic-bezier(0.36,0,0.64,1) 0s infinite alternate;
+        }
+        @keyframes ball2moveX{
+            0% {left: -20%;}
+            100% {left: 19.5%;}
+        }
+        @keyframes ball2moveY{
+            0% {top: 85.5%;}
+            100% {top: 110%;}
+        }
+        .ball2{
+        	top:85.5%;
+        	left:0;
+        	background:#62b5ff;
+        	animation: ball2moveX 2s cubic-bezier(0.36,0,0.64,1) -1s infinite alternate, ball2moveY 2s cubic-bezier(0.36,0,0.64,1) 0s infinite alternate;
+        }
+        @keyframes ball3moveX{
+            0% {left: 82%;}
+            100% {left: 110%;}
+        }
+        @keyframes ball3moveY{
+            0% {top: 70.8%;}
+            100% {top: 85.8%;}
+        }
+        .ball3{
+        	top:70.8%;
+        	left:95.5%;
+        	background:#ffb3c2;
+        	animation: ball3moveX 2s cubic-bezier(0.36,0,0.64,1) -1s infinite alternate, ball3moveY 2s cubic-bezier(0.36,0,0.64,1) 0s infinite alternate;
+        }
+  </style>
+</head>
+
+<body class="wrap">
+	<div class="content">
+		<div class="my-bg">
+			<img src="./image/bg.jpg" id="bg_img"/>
+		</div>
+		<div class="whiteButton">
+	        <div class="wave solid warning">
+	            <div class="circle"></div>
+	        </div>
+		</div>
+		<div class="ball1 ball"></div>
+		<div class="ball2 ball"></div>
+		<div class="ball3 ball"></div>
+		<!--<div class="my-button-first" id="intoFirst" onclick="goToFirstPage(0)" tapmode>进入首页<span class="aui-iconfont aui-icon-right" style="margin-left: 0.2rem"></span></div>-->
+		<div class="my-button-deal deal-left" id="dealLeft" onclick="goToFirstPage(0)">进入首页<span class="aui-iconfont aui-icon-right" style="margin-left: 0.5rem"></span></div>
+		<div class="my-button-deal deal-right" id="dealRight" onclick="goToFirstPage(2)">约好交易<span class="aui-iconfont aui-icon-right" style="margin-left: 0.5rem"></span></div>
+		<div class="my-gift-box"><img src="./image/box.png" id="boxImg"/></div>
+		<div class="my-icon-box-bg-1 my-icon-box" id="iconBox0" onclick="goToProductList(this)">
+			<div class="inside-circal-bg-1 inside-circal" style="background-repeat:no-repeat;background-size:cover;">
+			</div>
+		</div>
+  		<div class="my-icon-box-bg-1 my-icon-box" id="iconBox1" onclick="goToProductList(this)">
+			<div class="inside-circal-bg-1 inside-circal" style="background-repeat:no-repeat;background-size:cover;">
+			</div>
+		</div>
+  		<div class="my-icon-box-bg-1 my-icon-box" id="iconBox2" onclick="goToProductList(this)">
+			<div class="inside-circal-bg-1 inside-circal" style="background-repeat:no-repeat;background-size:cover;">
+			</div>
+		</div>
+ 		 <div class="my-icon-box-bg-1 my-icon-box" id="iconBox3" onclick="goToProductList(this)">
+			<div class="inside-circal-bg-1 inside-circal" style="background-repeat:no-repeat;background-size:cover;">
+			</div>
+		</div>
+ 		<div class="my-icon-box-bg-1 my-icon-box" id="iconBox4" onclick="goToProductList(this)">
+			<div class="inside-circal-bg-1 inside-circal" style="background-repeat:no-repeat;background-size:cover;">
+			</div>
+		</div>
+		<div class="my-icon-box-bg-1 my-icon-box" id="iconBox5" onclick="goToProductList(this)">
+			<div class="inside-circal-bg-1 inside-circal" style="background-repeat:no-repeat;background-size:cover;">
+			</div>
+		</div>
+		<div class="my-icon-box-bg-1 my-icon-box" id="iconBox6" onclick="goToProductList(this)">
+			<div class="inside-circal-bg-1 inside-circal" style="background-repeat:no-repeat;background-size:cover;">
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="./script/api.js"></script>
+<script type="text/javascript" src="./script/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="./script/request.js"></script>
+<script type="text/javascript" src="./script/jquery.md5.js"></script>
+<script type="text/javascript" src="./script/jgPush.js"></script>
+<script type="text/javascript">
+	var positionsTop;
+	var positionsLeft;
+	var iconBoxWeights;
+	var angles;
+    apiready = function() {
+    	var balls = $api.domAll('.ball');
+    	for(var i=0;i<balls.length;i++){
+    		$api.css(balls[i],'height:'+$api.offset(balls[i]).w+'px');
+    	}
+    	$api.css($api.dom('.whiteButton'),'height:'+$api.offset($api.dom('.whiteButton')).w+'px');
+
+    	iconBoxWeights = ['18%','20%','19%','22%','23%','21%','24%'];
+    	angles = [-10,-8,-5,7,10,9,5];
+    	var iconBoxes = $api.domAll('.my-icon-box');
+    	if(iconBoxes.length>0){
+    		for(var i=0;i<iconBoxes.length;i++){
+    			var ran = parseInt(7*Math.random());
+    			$api.css(iconBoxes[i],'width:'+iconBoxWeights[ran]);
+    			$api.css(iconBoxes[i],'height:'+$api.offset(iconBoxes[i]).w+'px');
+    			$api.css(iconBoxes[i],'transform:rotate('+angles[ran]+'deg)');
+    			$api.css(iconBoxes[i],'-ms-transform:rotate('+angles[ran]+'deg)');
+    			$api.css(iconBoxes[i],'-moz-transform:rotate('+angles[ran]+'deg)');
+    			$api.css(iconBoxes[i],'-webkit-transform:rotate('+angles[ran]+'deg)');
+    			$api.css(iconBoxes[i],'-o-transform:rotate('+angles[ran]+'deg)');
+    		}
+    	}
+      var mq = api.require('meiQia');
+      setPush();
+      mq.initMeiQia({
+        appkey:'33a9a64fbe40ccb1354779cb5033c663',
+      }, function(ret, err) {
+      })
+      api.addEventListener({
+        name:'keyback'
+      }, function(ret, err){
+        api.closeWidget({
+          silent:true
+        });
+
+      });
+		getPageData();
+    	positionsTop = ['8%','30%','56%','31%','76%','9%','55%'];
+    	positionsLeft = ['5%','4%','74%','73%','45%','75%','6%'];
+
+    	api.setStatusBarStyle({
+            style: 'dark'
+        });
+//		$api.css($api.byId('intoFirst'),'line-height:'+$api.offset($api.byId('intoFirst')).h+'px');
+		$api.css($api.byId('dealLeft'),'line-height:'+$api.offset($api.byId('dealLeft')).h+'px');
+		$api.css($api.byId('dealRight'),'line-height:'+$api.offset($api.byId('dealRight')).h+'px');
+    };
+    setTimeout(function(){
+		var iconBoxes = $('.my-icon-box');
+		if(iconBoxes.length>0){
+			var counter = 0;
+			var timer = setInterval(function(){
+				$('#iconBox'+counter).animate({
+                    top:0,
+                    left:0,
+                    // top:positionsTop[counter],
+                    // left:positionsLeft[counter],
+					opacity:1
+				},500);
+				counter++;
+				if(counter>=iconBoxes.length){
+					clearInterval(timer)
+				}
+			},100);
+		}
+    },3000);
+	function goToFirstPage(index){
+    if(index == 2){
+      var userId = $api.getStorage('userId');
+      if(!userId){
+        api.openWin({
+            name: 'login',
+            url: './html/winLogin.html',
+            pageParam: {
+                page:'login',
+                title: '登陆'
+            }
+        });
+      }else {
+        api.openWin({
+    	        name: 'firstPage',
+    	        url: './html/winIndex.html',
+              pageParam:{
+                  index:index
+              }
+            });
+      }
+    }else{
+		api.openWin({
+	        name: 'firstPage',
+	        url: './html/winIndex.html',
+          pageParam:{
+              index:index
+          }
+        });
+      }
+	}
+	function getPageData(){
+		var data = {};
+		requestData('Indexpagedata/getData',data,'NO','NO','NO',_callbackData);
+	}
+	function _callbackData(ret){
+		if(ret.status == 200){
+			var index = 0;
+			if(ret.shopList.length>0){
+				for(var i=0;i<ret.shopList.length;i++){
+					var bgNum = parseInt(Math.random()*4 + 1);
+					var boxId = 'iconBox'+index;
+					var classNameO = 'my-icon-box-bg-'+bgNum;
+					var classNameI = 'inside-circal-bg-'+bgNum;
+					$api.css($api.dom($api.byId(boxId), '.inside-circal'),'background-image:url("'+pictureUrl+ret.shopList[i].shop_logo+'")');
+//					$api.text($api.dom($api.byId(boxId), 'span'), ret.shopList[i].shop_name);
+					$api.removeCls($api.byId(boxId), 'my-icon-box-bg-1');
+					$api.addCls($api.byId(boxId), classNameO);
+					$api.removeCls($api.dom($api.byId(boxId), '.inside-circal'), 'inside-circal-bg-1');
+					$api.addCls($api.dom($api.byId(boxId), '.inside-circal'), classNameI);
+					$api.attr($api.byId(boxId), 'itemId',ret.shopList[i].id);
+          			$api.attr($api.byId(boxId), 'type','shop');
+          			$api.attr($api.byId(boxId), 'shop-name',ret.shopList[i].shop_name);
+					index++;
+				}
+			}
+			if(ret.gameList.length>0){
+				for(var j=0;j<ret.gameList.length;j++){
+					var bgNum = parseInt(Math.random()*4 + 1);
+					var boxId = 'iconBox'+index;
+					var classNameO = 'my-icon-box-bg-'+bgNum;
+					var classNameI = 'inside-circal-bg-'+bgNum;
+					$api.css($api.dom($api.byId(boxId), '.inside-circal'),'background-image:url("'+pictureUrl+ret.gameList[j].game_icon+'")');
+//					$api.text($api.dom($api.byId(boxId), 'span'), ret.gameList[j].game_name);
+					$api.removeCls($api.byId(boxId), 'my-icon-box-bg-1');
+					$api.addCls($api.byId(boxId), classNameO);
+					$api.removeCls($api.dom($api.byId(boxId), '.inside-circal'), 'inside-circal-bg-1');
+					$api.addCls($api.dom($api.byId(boxId), '.inside-circal'), classNameI);
+			          $api.attr($api.byId(boxId), 'itemId',ret.gameList[j].id);
+			          $api.attr($api.byId(boxId), 'type','game');
+					index++;
+				}
+			}
+		}
+	}
+  function goToProductList(tag){
+    if($api.attr(tag, 'type') == 'shop'){
+      api.openWin({
+				name: 'shopDetail',
+				url: './html/win.html',
+				pageParam: {
+						page:'shopDetail',
+						title: $api.attr(tag, 'shop-name'),
+          data:{
+          	id:$api.attr(tag, 'itemId'),
+          },
+          bounces:true
+				}
+		});
+    }
+    if($api.attr(tag, 'type') == 'game'){
+      api.openWin({
+				name: 'ProductListPage',
+				url: './html/win.html',
+				pageParam: {
+						page:'ProductListPage',
+						title: '商品列表',
+          data:{
+          	id:$api.attr(tag, 'itemId'),
+          	userType:'seller'
+          },
+          bounces:true
+				}
+		});
+    }
+  }
+</script>
+
+</html>

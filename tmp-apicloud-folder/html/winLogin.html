@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>page1</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="../css/uz.css" /> -->
+    <style>
+        html,body {
+            height: 100%;
+            width: 100%;
+            background-color: #f2f2f2;
+        }
+        .head{
+            width: 100%;
+            height:100%;
+            background: #e14104;
+            line-height: 2.6rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header" style="height:3.7rem">
+        <div class="head aui-row">
+             <div class="aui-col-xs-1" style="text-align:center;color:white;font-weight:bold">
+                <span class="aui-iconfont aui-icon-paper"></span>
+            </div> 
+            <div class="aui-col-xs-10 my-color aui-ellipsis-1" id="header-title" style="text-align:center;color:white;font-size:5vw"></div>
+            <div class="aui-col-xs-1"></div>
+        </div>
+
+
+    </header>
+
+    <div id="main" class="flex-con">
+
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<!-- <script type="text/javascript" src="../script/uz.js"></script> -->
+<script type="text/javascript">
+    apiready = function() {
+        var header = $api.byId('header');
+        $api.fixStatusBar(header);
+        api.addEventListener({
+    			name:'keyback'
+    		}, function(ret, err){
+    			api.closeWidget({
+    				silent:false
+    			});
+
+    		});
+        var data = api.pageParam.data;
+        var page = api.pageParam.page;
+        var title = api.pageParam.title;
+        var bounces = api.pageParam.bounces;
+        $api.html($api.byId('header-title'), title);
+        
+
+        var headerPos = $api.offset(header);
+        var body_h = $api.offset($api.dom('body')).h;
+
+        api.openFrame({
+            name: page,
+            bounces: bounces,
+            url: page + '.html',
+            vScrollBarEnabled: false,
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: 'auto',
+                h: body_h - headerPos.h,
+                marginBottom: 0
+            },
+            pageParam: {
+                data: data
+            }
+        });
+    };
+
+    function closeWin() {
+        api.closeWin();
+    }
+</script>
+
+</html>
