@@ -29,11 +29,10 @@
 
 		.user-wrap {
 			width: 100%;
-			height: 6.5rem;
+			height: 7rem;
 			background: #fff;
 			border-radius: 6px;
 			display: flex;
-			align-items: center;
 		}
 
 		.user-header-box {
@@ -42,11 +41,24 @@
 			display: flex;
 		}
 
+		.right-arrow:after {
+			display: inline-block;
+			width: 0.5rem;
+			height: 0.8rem;
+			background: url(../image/imgIndex/wode_icon_jiantou@2x.png) no-repeat;
+		}
+
 		.user-name {
 			width: 100%;
-			height: 2rem;
 			line-height: 2rem;
 			color: white;
+		}
+
+		.money-icon {
+			display: inline-block;
+			width: 0.6rem;
+			height: 0.6rem;
+			margin: 0 0.25rem;
 		}
 
 		.user-header {
@@ -182,7 +194,10 @@
 				<div class="user-name">
 					<p id="userName"></p>
 					<p>我的余额:
-						<span class="" style="color: red;padding-top:0.4rem;" id="money">0.00</span>
+						<span class="" style="color: red;padding-top:0.4rem;" id="money">
+							<span class="money-icon">
+								<img src="../image/imgProduct/wode_icon_jingbi@2x.png">
+							</span>0.00
 					</p>
 					<!-- <i class="fa fa-edit" style="margin-left: 0.3rem;color: black"></i> -->
 					<!-- <img src="../image/gai.png" alt="" class="gai"> -->
@@ -265,12 +280,14 @@
 			<div class="aui-col-xs-12" style="padding:1rem 0;padding:0;border-right: 1px solid #eee;display:block;" onclick="yuehaoOrderList(0)">
 				<!-- <i class="fa fa-user" style="color: #918fe3"></i> -->
 				<!-- <img src="../image/mairu.jpg" alt="" class="todo_pay"> -->
-				<div class="aui-grid-label" style="padding:0.5rem 0;text-align:left;padding-left:20px;font-size:16px;font-weight:bolder;border-bottom:1px solid #eee;"> 约好买入</div>
+				<div class="aui-grid-label" style="padding:0.5rem 0;text-align:left;padding-left:20px;font-size:16px;font-weight:bolder;border-bottom:1px solid #eee;">
+					约好买入</div>
 			</div>
 			<div class="aui-col-xs-12" style="padding:1rem 0;padding:0;display:block;" onclick="yuehaoOrderList(1)">
 				<!-- <i class="fa fa-bank" style="color: #5bc62a"></i> -->
 				<!-- <img src="../image/maichu.jpg" alt="" class="todo_pay"> -->
-				<div class="aui-grid-label" style="padding:0.5rem 0;text-align:left;padding-left:20px;font-size:16px;font-weight:bolder;border-bottom:1px solid #eee;"> 约好卖出</div>
+				<div class="aui-grid-label" style="padding:0.5rem 0;text-align:left;padding-left:20px;font-size:16px;font-weight:bolder;border-bottom:1px solid #eee;">
+					约好卖出</div>
 			</div>
 		</div>
 	</section>
